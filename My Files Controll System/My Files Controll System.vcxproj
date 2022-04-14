@@ -163,15 +163,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Core\GarbageCollector.cpp" />
     <ClCompile Include="Source\Core\IBaseComponent.cpp" />
     <ClCompile Include="Source\Core\main.cpp" />
     <ClCompile Include="Source\FileControll\private\FileControll.cpp" />
     <ClCompile Include="Source\FileControll\private\XMLComponent.cpp" />
+    <ClCompile Include="Source\Internet\private\InternetComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\Core\GarbageCollector.h" />
     <ClInclude Include="Source\Core\IBaseComponent.h" />
     <ClInclude Include="Source\FileControll\public\FileControll.h" />
     <ClInclude Include="Source\FileControll\public\XMLComponent.h" />
+    <ClInclude Include="Source\Internet\public\InternetComponent.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

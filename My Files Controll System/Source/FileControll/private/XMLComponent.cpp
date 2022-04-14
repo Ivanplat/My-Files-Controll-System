@@ -97,8 +97,6 @@ void XMLComponent::AddFileToIgnore(std::filesystem::path Path, std::string Hash)
 
 	if (FileControllComponent::CheckFile(FilePath))
 	{
-		//char* st = nullptr;
-		//IgnoreDocument->Parse(st);
 		auto Root = IgnoreDocument->FirstChildElement();
 		if (Root)
 		{
@@ -123,6 +121,12 @@ void XMLComponent::AddDirectoryToIgnore(std::filesystem::path Path)
 		{
 			auto DirectoriesElement = Root->FirstChildElement("DIRECTORIES");
 			auto DirectoryInfo = IgnoreDocument->NewElement("Directory");
+			auto DirectoriesSum = DirectoriesElement->FirstChildElement("DIRECTORIES-CHECK-SUM");
+			if (DirectoriesSum)
+			{
+				auto CurrentValue = DirectoriesSum->FindAttribute("Count")->IntValue();
+				DirectoriesSum->SetAttribute("Count", ++CurrentValue);
+			}
 			DirectoryInfo->SetText(GetFileNameFromPath(Path).c_str());
 			DirectoryInfo->SetAttribute("Path", Path.string().c_str());
 			DirectoriesElement->InsertEndChild(DirectoryInfo);

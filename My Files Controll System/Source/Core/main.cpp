@@ -6,41 +6,21 @@
 #include "IBaseComponent.h"
 #include "FileControll/public/FileControll.h"
 #include "FileControll/public/XMLComponent.h"
+#include "Internet/public/InternetComponent.h"
+
+#include "GarbageCollector.h"
 
 
 
 int main()
 {
-	/*std::unique_ptr<FileControllComponent> Test(new FileControllComponent("FileControll"));
-	Test->StartupModule();*/
-	//Test.release();
 	setlocale(LC_ALL, "Russian");
 
-	//std::ifstream f(std::filesystem::current_path().string() + "\\" + "FilesControll\\checkout.cfg");
-	//std::string buf;
-	//std::vector<std::string> vbuf;
-	//while (std::getline(f, buf))
-	//{
-	//	vbuf.push_back(buf);
-	//}
-	//for (auto& i : vbuf)
-	//{
-	//	std::cout << i << std::endl;
-	//}
+	std::unique_ptr<XMLComponent> XML(new XMLComponent("XMLComponent"));
+	std::unique_ptr<FileControllComponent> Files(new FileControllComponent("FileControll"));
+	std::unique_ptr<InternetComponent> Internet(new InternetComponent("InternetComponent"));
 
-	XMLComponent xml("XMLComponent");
-	xml.StartupModule();
-	xml.LoadIgnoreDocument();
-	//xml.RemoveDirectoryFromIgnore("C:\\Users\\EventGraph\\source\\repos\\My Files Controll System\\My Files Controll System\\Intermidate");
-	/*xml.AddDirectoryToIgnore("C:\\Users\\EventGraph\\source\\repos\\My Files Controll System\\My Files Controll System\\Intermidate");
-	xml.AddDirectoryToIgnore("C:\\Users\\EventGraph\\source\\repos\\My Files Controll System\\My Files Controll System\\Intermidate");
-	xml.AddFileToIgnore("C:\\Users\\EventGraph\\source\\repos\\My Files Controll System\\My Files Controll System\\Intermidate\\123.txt", "1231231");
-	xml.AddFileToIgnore("C:\\Users\\EventGraph\\source\\repos\\My Files Controll System\\My Files Controll System\\Intermidate\\1dfgd3.txt", "1231231");
-	xml.AddFileToIgnore("C:\\Users\\EventGraph\\source\\repos\\My Files Controll System\\My Files Controll System\\Intermidate\\1223.txt", "1231231");
-	xml.AddFileToIgnore("C:\\Users\\EventGraph\\source\\repos\\My Files Controll System\\My Files Controll System\\Intermidate\\124.txt", "1231231");*/
-	xml.SaveIgnoreDocument();
-	//xml.RemoveFileFromIgnore("C:\\Users\\EventGraph\\source\\repos\\My Files Controll System\\My Files Controll System\\Intermidate\\123.txt");
-	//while (true);
+	Internet->DownloadFile(FileControllComponent::GetRootDirectory()+"\\124.jpg", "http://almode.ru/uploads/posts/2021-04/1619739374_23-p-krasivii-dom-u-ozera-26.jpg");
 
 	return 0;
 }

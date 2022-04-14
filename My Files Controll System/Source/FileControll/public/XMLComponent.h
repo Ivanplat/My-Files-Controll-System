@@ -16,9 +16,11 @@ public:
 	
 public:
 	virtual void StartupModule() override;
+private:
 	virtual void InitIgnoreFile();
 	virtual void InitCheckoutFile();
 	virtual void InitStatusFile();
+public:
 	virtual void AddFileToIgnore(std::filesystem::path Path, std::string Hash);
 	virtual void AddDirectoryToIgnore(std::filesystem::path Path);
 	virtual void RemoveFileFromIgnore(std::filesystem::path Path);

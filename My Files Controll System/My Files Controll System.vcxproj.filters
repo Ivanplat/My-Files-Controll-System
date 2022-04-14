@@ -19,6 +19,9 @@
     <Filter Include="Source\FileControll">
       <UniqueIdentifier>{abe4da7d-f8bf-47ab-8a04-316cbc0a199b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\Internet">
+      <UniqueIdentifier>{f3b10f11-5fc2-4fa4-b075-abba6e7d5118}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Core\IBaseComponent.cpp">
@@ -33,6 +36,12 @@
     <ClCompile Include="Source\FileControll\private\XMLComponent.cpp">
       <Filter>Source\FileControll</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Internet\private\InternetComponent.cpp">
+      <Filter>Source\Internet</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Core\GarbageCollector.cpp">
+      <Filter>Source\Core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Core\IBaseComponent.h">
@@ -43,6 +52,12 @@
     </ClInclude>
     <ClInclude Include="Source\FileControll\public\XMLComponent.h">
       <Filter>Source\FileControll</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Internet\public\InternetComponent.h">
+      <Filter>Source\Internet</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Core\GarbageCollector.h">
+      <Filter>Source\Core</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
