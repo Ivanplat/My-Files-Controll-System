@@ -6,8 +6,10 @@
 #include <map>
 #include <thread>
 
+#include "Core/GarbageCollector.h"
 
-std::set<std::filesystem::path> FileControllComponent::IgnoredFiles = std::set<std::filesystem::path>();
+
+std::set<std::pair<std::filesystem::path, std::string>> FileControllComponent::IgnoredFiles = std::set<std::pair<std::filesystem::path, std::string>>();
 std::set<std::filesystem::path> FileControllComponent::IgnoredDirectories = std::set<std::filesystem::path>();
 std::set<std::filesystem::path> FileControllComponent::Directories = std::set<std::filesystem::path>(); 
 std::set<std::filesystem::path> FileControllComponent::AddedDirectories = std::set<std::filesystem::path>();
@@ -94,17 +96,7 @@ std::set<std::filesystem::path> FileControllComponent::GetAllDirectories()
 
 void FileControllComponent::GetAllFiles()
 {
-	for (const auto& path : Directories)
-	{
-		for (const auto& i : std::filesystem::directory_iterator(path))
-		{
-			auto filePath = i.path();
-			if (CheckFile(filePath) && IgnoredFiles.find(filePath) == IgnoredFiles.end())
-			{
-				
-			}
-		}
-	}
+
 }
 
 const bool FileControllComponent::CheckEachDirectory(std::string Directory)
@@ -161,13 +153,33 @@ void FileControllComponent::IsDirectoriesChanged()
 
 }
 
+void FileControllComponent::GetAllIgnored()
+{
+	auto gc = GarbageCollector::Instance();
+	auto ignoredDirectories = gc->XML->GetIgnoredDirectories();
+	auto ignoredFiles = gc->XML->GetIgnoredFiles();
+	IgnoredDirectories.insert(ignoredDirectories.begin(), ignoredDirectories.end());
+	IgnoredFiles.insert(ignoredFiles.begin(), ignoredFiles.end());
+
+	for (const auto& i : IgnoredDirectories)
+	{
+		std::cout << i.string() << std::endl;
+	}
+
+	for (const auto& i : IgnoredFiles)
+	{
+		std::cout << i.second << std::endl;
+	}
+}
+
 void FileControllComponent::StartupModule()
 {
-	Directories = GetAllDirectories();
-	for (const auto& i : Files)
-	{
-		//std::cout << i.string() << std::endl;
-	}
-	Checker = std::thread(&FileControllComponent::CheckUpdates, this);
-	Checker.join();
+	GetAllIgnored();
+	//Directories = GetAllDirectories();
+	//for (const auto& i : Files)
+	//{
+	//	//std::cout << i.string() << std::endl;
+	//}
+	/*Checker = std::thread(&FileControllComponent::CheckUpdates, this);
+	Checker.join();*/
 }

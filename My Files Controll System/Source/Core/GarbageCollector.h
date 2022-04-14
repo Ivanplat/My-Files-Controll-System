@@ -5,25 +5,19 @@
 #include <vector>
 
 #include "Core/IBaseComponent.h"
+#include "FileControll/public/FileControll.h"
+#include "FileControll/public/XMLComponent.h"
+#include "Internet/public/InternetComponent.h"
 
 class GarbageCollector
 {
 public:
 	static GarbageCollector* Instance();
 public:
-	template<class T>
-	std::unique_ptr<T> CreateNewComponent(std::string ComponentName);
+	std::unique_ptr<XMLComponent> XML;
+	std::unique_ptr<FileControllComponent> Files;
+	std::unique_ptr<InternetComponent> Internet;
 private:
-	std::vector<std::unique_ptr<IBaseComponent>> Components;
-private:
-	explicit GarbageCollector() noexcept = default;
-	virtual ~GarbageCollector() noexcept = default;
+	explicit GarbageCollector() noexcept;
+	virtual ~GarbageCollector() noexcept;
 };
-
-template<class T>
-inline std::unique_ptr<T> GarbageCollector::CreateNewComponent(std::string ComponentName)
-{
-	auto n = std::unique_ptr<T>(new T(ComponentName));
-	Components.push_back(dynamic_cast<std::unique_ptr<IBaseComponent>>(n));
-	return n;
-}

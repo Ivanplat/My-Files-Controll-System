@@ -1,8 +1,13 @@
 <Ignore Version="" Platform="">
-    <DIRECTORIES>
-        <DIRECTORIES-CHECK-SUM Count="0"/>
+    <DIRECTORIES Count="3">
+        <Directory Path="1232\asda\asdavv">asdavv</Directory>
+        <Directory Path="dfgddfg\dfgd\vbvbv">vbvbv</Directory>
+        <Directory Path="vvvv\aaaaa\ddddd">ddddd</Directory>
     </DIRECTORIES>
-    <FILES>
-        <FILES-CHECK-SUM Count="0"/>
+    <FILES Count="4">
+        <File Path="ABOBA2.txt" Hash="bcvbf">ABOBA2.txt</File>
+        <File Path="ABOBA.txt" Hash="423432">ABOBA.txt</File>
+        <File Path="ABOBA2.txt" Hash="bcvbf">ABOBA2.txt</File>
+        <File Path="ABOBA.txt" Hash="423432">ABOBA.txt</File>
     </FILES>
 </Ignore>

@@ -6,6 +6,7 @@
 
 #include <memory>
 #include <filesystem>
+#include <map>
 
 
 class XMLComponent : public virtual IBaseComponent
@@ -28,6 +29,8 @@ public:
 	void SaveIgnoreDocument();
 	void LoadIgnoreDocument();
 	std::string GetFileNameFromPath(std::filesystem::path Path);
+	std::vector<std::filesystem::path> GetIgnoredDirectories();
+	std::vector<std::pair<std::filesystem::path, std::string>> GetIgnoredFiles();
 protected:
 	std::unique_ptr<tinyxml2::XMLDocument> IgnoreDocument;
 };

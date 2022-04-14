@@ -44,7 +44,7 @@ public:
 protected:
 	static std::set<std::map<std::filesystem::path, std::string>> Files;
 	static std::set<std::filesystem::path> Directories;
-	static std::set<std::filesystem::path> IgnoredFiles;
+	static std::set<std::pair<std::filesystem::path, std::string>> IgnoredFiles;
 	static std::set<std::filesystem::path> IgnoredDirectories;
 	static std::set<std::filesystem::path> AddedDirectories;
 	static std::set<std::filesystem::path> RemovedDirectories;
@@ -55,6 +55,7 @@ private:
 	void GetAllFiles();
 	const bool CheckEachDirectory(std::string Directory);
 	void IsDirectoriesChanged();
+	void GetAllIgnored();
 public:
 	virtual void StartupModule() override;
 };
