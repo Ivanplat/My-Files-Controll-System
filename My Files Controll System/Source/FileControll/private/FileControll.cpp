@@ -9,35 +9,46 @@
 
 std::set<std::filesystem::path> FileControllComponent::IgnoredFiles = std::set<std::filesystem::path>();
 std::set<std::filesystem::path> FileControllComponent::IgnoredDirectories = std::set<std::filesystem::path>();
-std::set<std::filesystem::path> FileControllComponent::Directories = std::set<std::filesystem::path>();
+std::set<std::filesystem::path> FileControllComponent::Directories = std::set<std::filesystem::path>(); 
+std::set<std::filesystem::path> FileControllComponent::AddedDirectories = std::set<std::filesystem::path>();
+std::set<std::filesystem::path> FileControllComponent::RemovedDirectories = std::set<std::filesystem::path>();
+std::set<std::filesystem::path> FileControllComponent::ChangedDirectories = std::set<std::filesystem::path>();
+std::set<std::map<std::filesystem::path, std::string>> FileControllComponent::Files = std::set<std::map<std::filesystem::path, std::string>>();
 
-bool FileControllComponent::CheckFile(std::filesystem::path FilePath) const
+const bool FileControllComponent::CheckFile(std::filesystem::path FilePath)
 {
 	return std::filesystem::is_regular_file(FilePath) || std::filesystem::is_character_file(FilePath) || std::filesystem::is_block_file(FilePath);
 }
 
-const bool FileControllComponent::CheckDirectory(std::string DirectoryPath) const
+const bool FileControllComponent::CheckDirectory(std::string DirectoryPath)
 {
 	return std::filesystem::is_directory(DirectoryPath);
 }
 
-std::string FileControllComponent::GetCurrentDirectory() const
+std::string FileControllComponent::GetCurrentDirectory()
 {
 	return std::filesystem::current_path().string();
 }
 
-std::string FileControllComponent::GetRootDirectory() const
+std::string FileControllComponent::GetRootDirectory()
 {
 	return GetCurrentDirectory();
 }
 
-void FileControllComponent::CheckUpdates()
+void FileControllComponent::CheckUpdates(FileControllComponent* self)
 {
 	while (true)
 	{
 		std::cout << "Check" << std::endl;
+		self->IsDirectoriesChanged();
 		std::this_thread::sleep_for(std::chrono::seconds(1));
 	}
+}
+
+void FileControllComponent::CreateFile(std::string FileName)
+{
+	std::ofstream outfile(FileName);
+	outfile.close();
 }
 
 
@@ -63,11 +74,10 @@ bool SpecialCheck(std::set<std::filesystem::path> Dir, std::filesystem::path Pat
 	return false;
 }
 
-void FileControllComponent::StartupModule()
+std::set<std::filesystem::path> FileControllComponent::GetAllDirectories()
 {
 	auto FileControllDirectory = GetRootDirectory();
-	std::vector<std::filesystem::path> Files;
-	
+	std::set<std::filesystem::path> Temp;
 	for (const auto& i : std::filesystem::recursive_directory_iterator(FileControllDirectory))
 	{
 		auto path = i.path();
@@ -75,10 +85,15 @@ void FileControllComponent::StartupModule()
 		{
 			if (!SpecialCheck(IgnoredDirectories, path))
 			{
-				Directories.insert(path);
+				Temp.insert(path);
 			}
 		}
 	}
+	return Temp;
+}
+
+void FileControllComponent::GetAllFiles()
+{
 	for (const auto& path : Directories)
 	{
 		for (const auto& i : std::filesystem::directory_iterator(path))
@@ -86,14 +101,73 @@ void FileControllComponent::StartupModule()
 			auto filePath = i.path();
 			if (CheckFile(filePath) && IgnoredFiles.find(filePath) == IgnoredFiles.end())
 			{
-				Files.push_back(filePath);
+				
 			}
 		}
 	}
+}
+
+const bool FileControllComponent::CheckEachDirectory(std::string Directory)
+{
+	for (const auto& i : std::filesystem::recursive_directory_iterator(Directory))
+	{
+		auto path = i.path();
+		if (CheckDirectory(path.string()))
+		{
+			if (!SpecialCheck(IgnoredDirectories, path))
+			{
+				return true;
+			}
+		}
+	}
+	return false;
+}
+
+void FileControllComponent::IsDirectoriesChanged()
+{
+	auto NewDirs = GetAllDirectories();
+	std::cout << "DIRECTORIES REMOVED" << std::endl;
+	std::set<std::filesystem::path> Temp;
+	if (Directories - NewDirs != RemovedDirectories)
+	{
+		for (const auto& i : Directories)
+		{
+			if (NewDirs.find(i) == NewDirs.end())
+			{
+				std::cout << i.string() << std::endl;
+				Temp = Directories - NewDirs;
+				RemovedDirectories.insert(Temp.begin(), Temp.end());
+			}
+		}
+	}
+	Temp.clear();
+	std::cout << "\n\nDIRECTORIES ADDED" << std::endl;
+	if (NewDirs - Directories != AddedDirectories)
+	{
+		for (const auto& i : NewDirs)
+		{
+			if (Directories.find(i) == Directories.end())
+			{
+				Temp = NewDirs - Directories;
+				if (!std::filesystem::is_empty(i))
+				{
+					std::cout << i.string() << std::endl;
+					AddedDirectories.insert(Temp.begin(), Temp.end());
+				}
+			}
+		}
+	}
+	std::cout << "\n\n";
+
+}
+
+void FileControllComponent::StartupModule()
+{
+	Directories = GetAllDirectories();
 	for (const auto& i : Files)
 	{
-		std::cout << i.string() << std::endl;
+		//std::cout << i.string() << std::endl;
 	}
-	Checker = std::thread(&FileControllComponent::CheckUpdates);
+	Checker = std::thread(&FileControllComponent::CheckUpdates, this);
 	Checker.join();
 }

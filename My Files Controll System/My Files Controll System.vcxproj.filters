@@ -30,12 +30,18 @@
     <ClCompile Include="Source\FileControll\private\FileControll.cpp">
       <Filter>Source\FileControll</Filter>
     </ClCompile>
+    <ClCompile Include="Source\FileControll\private\XMLComponent.cpp">
+      <Filter>Source\FileControll</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Core\IBaseComponent.h">
       <Filter>Source\Core</Filter>
     </ClInclude>
     <ClInclude Include="Source\FileControll\public\FileControll.h">
+      <Filter>Source\FileControll</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\FileControll\public\XMLComponent.h">
       <Filter>Source\FileControll</Filter>
     </ClInclude>
   </ItemGroup>

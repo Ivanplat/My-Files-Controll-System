@@ -166,10 +166,12 @@
     <ClCompile Include="Source\Core\IBaseComponent.cpp" />
     <ClCompile Include="Source\Core\main.cpp" />
     <ClCompile Include="Source\FileControll\private\FileControll.cpp" />
+    <ClCompile Include="Source\FileControll\private\XMLComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Core\IBaseComponent.h" />
     <ClInclude Include="Source\FileControll\public\FileControll.h" />
+    <ClInclude Include="Source\FileControll\public\XMLComponent.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
