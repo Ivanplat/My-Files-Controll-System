@@ -1,9 +1,7 @@
+#include "pch.h"
 #include "Internet/public/InternetComponent.h"
-#include <iostream>
 #include <urlmon.h>
 #include <tchar.h>
-#include <thread>
-#include <filesystem>
 
 
 #pragma comment (lib, "urlmon.lib")

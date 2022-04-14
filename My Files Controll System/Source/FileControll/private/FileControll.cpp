@@ -1,11 +1,5 @@
+#include "pch.h"
 #include "FileControll/public/FileControll.h"
-
-#include <iostream>
-#include <set>
-#include <functional>
-#include <map>
-#include <thread>
-
 #include "Core/GarbageCollector.h"
 
 
@@ -155,9 +149,8 @@ void FileControllComponent::IsDirectoriesChanged()
 
 void FileControllComponent::GetAllIgnored()
 {
-	auto gc = GarbageCollector::Instance();
-	auto ignoredDirectories = gc->XML->GetIgnoredDirectories();
-	auto ignoredFiles = gc->XML->GetIgnoredFiles();
+	auto ignoredDirectories = GC->XML->GetIgnoredDirectories();
+	auto ignoredFiles = GC->XML->GetIgnoredFiles();
 	IgnoredDirectories.insert(ignoredDirectories.begin(), ignoredDirectories.end());
 	IgnoredFiles.insert(ignoredFiles.begin(), ignoredFiles.end());
 

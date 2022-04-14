@@ -1,3 +1,4 @@
+#include "pch.h"
 #include "Core/GarbageCollector.h"
 
 GarbageCollector* GarbageCollector::Instance()
@@ -12,6 +13,8 @@ GarbageCollector::GarbageCollector() noexcept
 	Files = std::unique_ptr<FileControllComponent>(new FileControllComponent("FileControll"));
 	Internet = std::unique_ptr<InternetComponent>(new InternetComponent("InternetComponent"));
 	CommandParser = std::unique_ptr<CommandParserComponent>(new CommandParserComponent("CommandParserComponent"));
+	System = std::unique_ptr<SystemComponent>(new SystemComponent("SystemComponent"));
+	Log = Logger::Instance();
 }
 
 GarbageCollector::~GarbageCollector() noexcept

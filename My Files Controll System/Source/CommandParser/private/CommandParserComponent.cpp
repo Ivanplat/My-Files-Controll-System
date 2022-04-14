@@ -1,8 +1,5 @@
+#include "pch.h"
 #include "CommandParser/public/CommandParserComponent.h"
-
-#include "Core/GarbageCollector.h"
-
-#include <iostream>
 
 void CommandParserComponent::StartupModule()
 {
@@ -14,8 +11,6 @@ void CommandParserComponent::Update()
 
 void CommandParserComponent::ParseCommand(std::string& Command)
 {
-	auto GC = GarbageCollector::Instance();
-
 	std::string buf;
 	std::vector<std::string> parsed;
 	bool Quotes = false;

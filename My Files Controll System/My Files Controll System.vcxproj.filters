@@ -48,6 +48,15 @@
     <ClCompile Include="Source\CommandParser\private\CommandParserComponent.cpp">
       <Filter>Source\CommandParser</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Core\Logger.cpp">
+      <Filter>Source\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Core\SystemComponent.cpp">
+      <Filter>Source\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\pch.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Core\IBaseComponent.h">
@@ -67,6 +76,15 @@
     </ClInclude>
     <ClInclude Include="Source\CommandParser\public\CommandParserComponent.h">
       <Filter>Source\CommandParser</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Core\Logger.h">
+      <Filter>Source\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Core\SystemComponent.h">
+      <Filter>Source\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\pch.h">
+      <Filter>Source</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

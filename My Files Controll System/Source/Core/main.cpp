@@ -1,7 +1,5 @@
-#include <iostream>
-#include <memory>
+#include "pch.h"
 #include <stdarg.h>
-#include <fstream>
 
 #include "IBaseComponent.h"
 #include "FileControll/public/FileControll.h"
@@ -9,6 +7,7 @@
 #include "Internet/public/InternetComponent.h"
 
 #include "GarbageCollector.h"
+#include "Logger.h"
 
 
 
@@ -16,7 +15,7 @@ int main()
 {
 	setlocale(LC_ALL, "Russian");
 
-	GarbageCollector* GC = GarbageCollector::Instance();
+	GC->Log->CreateLogFile();
 	GC->XML->StartupModule();
 	GC->Internet->StartupModule();
 	GC->Files->StartupModule();

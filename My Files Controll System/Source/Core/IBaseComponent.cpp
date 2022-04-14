@@ -1,3 +1,4 @@
+#include "pch.h"
 #include "IBaseComponent.h"
 
 IBaseComponent::IBaseComponent(std::string ComponentName) noexcept : ComponentName(ComponentName)

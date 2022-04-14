@@ -99,6 +99,8 @@
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <AdditionalIncludeDirectories>C:\Users\EventGraph\source\repos\My Files Controll System\My Files Controll System\Source;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PrecompiledHeader>Create</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -117,6 +119,8 @@
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <AdditionalIncludeDirectories>C:\Users\EventGraph\source\repos\My Files Controll System\My Files Controll System\Source;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PrecompiledHeader>Create</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -135,6 +139,8 @@
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <AdditionalIncludeDirectories>C:\Users\EventGraph\source\repos\My Files Controll System\My Files Controll System\Source;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PrecompiledHeader>Create</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -153,6 +159,8 @@
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <AdditionalIncludeDirectories>C:\Users\EventGraph\source\repos\My Files Controll System\My Files Controll System\Source;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PrecompiledHeader>Create</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -166,18 +174,24 @@
     <ClCompile Include="Source\CommandParser\private\CommandParserComponent.cpp" />
     <ClCompile Include="Source\Core\GarbageCollector.cpp" />
     <ClCompile Include="Source\Core\IBaseComponent.cpp" />
+    <ClCompile Include="Source\Core\Logger.cpp" />
     <ClCompile Include="Source\Core\main.cpp" />
+    <ClCompile Include="Source\Core\SystemComponent.cpp" />
     <ClCompile Include="Source\FileControll\private\FileControll.cpp" />
     <ClCompile Include="Source\FileControll\private\XMLComponent.cpp" />
     <ClCompile Include="Source\Internet\private\InternetComponent.cpp" />
+    <ClCompile Include="Source\pch.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\CommandParser\public\CommandParserComponent.h" />
     <ClInclude Include="Source\Core\GarbageCollector.h" />
     <ClInclude Include="Source\Core\IBaseComponent.h" />
+    <ClInclude Include="Source\Core\Logger.h" />
+    <ClInclude Include="Source\Core\SystemComponent.h" />
     <ClInclude Include="Source\FileControll\public\FileControll.h" />
     <ClInclude Include="Source\FileControll\public\XMLComponent.h" />
     <ClInclude Include="Source\Internet\public\InternetComponent.h" />
+    <ClInclude Include="Source\pch.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

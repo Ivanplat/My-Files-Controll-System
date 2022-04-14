@@ -1,29 +1,30 @@
+#include "pch.h"
 #include "FileControll/public/XMLComponent.h"
-
 #include "FileControll/public/FileControll.h"
-
 #include "Core/GarbageCollector.h"
 
-#include <iostream>
 
 using namespace tinyxml2;
 
 void XMLComponent::StartupModule()
 {
+	GC->Log->PrintToLog("XMLComponent::StartupModule()");
 	IgnoreDocument = std::unique_ptr<XMLDocument>(new XMLDocument());
 	InitStatusFile();
 	InitIgnoreFile();
 	InitCheckoutFile();
+	GC->Log->PrintToLog("XMLComponent started up");
 }
 
 void XMLComponent::Update()
 {
-	auto GC = GarbageCollector::Instance();
+	GC->Log->PrintToLog("XMLComponent::Update()");
 	GC->Files->Update();
 }
 
 void XMLComponent::InitIgnoreFile()
 {
+	GC->Log->PrintToLog("XMLComponent::InitIgnoreFile()");
 	auto FilePath = FileControllComponent::GetRootDirectory() + "\\FilesControll\\ignore.xml";
 
 	if (!FileControllComponent::CheckFile(FilePath))
@@ -50,6 +51,7 @@ void XMLComponent::InitIgnoreFile()
 
 void XMLComponent::InitCheckoutFile()
 {
+	GC->Log->PrintToLog("XMLComponent::InitCheckoutFile()");
 	auto FilePath = FileControllComponent::GetRootDirectory() + "\\FilesControll\\checkout.xml";
 
 	if (!FileControllComponent::CheckFile(FilePath))
@@ -74,6 +76,7 @@ void XMLComponent::InitCheckoutFile()
 
 void XMLComponent::InitStatusFile()
 {
+	GC->Log->PrintToLog("XMLComponent::InitStatusFile()");
 	auto FilePath = FileControllComponent::GetRootDirectory() + "\\FilesControll\\status.xml";
 	if (!FileControllComponent::CheckFile(FilePath))
 	{
@@ -97,6 +100,7 @@ void XMLComponent::InitStatusFile()
 
 void XMLComponent::AddFileToIgnore(std::filesystem::path Path, std::string Hash)
 {
+	GC->Log->PrintToLog("XMLComponent::AddFileToIgnore()");
 	auto FilePath = FileControllComponent::GetRootDirectory() + "\\FilesControll\\ignore.xml";
 
 	if (FileControllComponent::CheckFile(FilePath))
@@ -121,6 +125,7 @@ void XMLComponent::AddFileToIgnore(std::filesystem::path Path, std::string Hash)
 
 void XMLComponent::AddDirectoryToIgnore(std::filesystem::path Path)
 {
+	GC->Log->PrintToLog("XMLComponent::AddDirectoryToIgnore()");
 	auto FilePath = FileControllComponent::GetRootDirectory() + "\\FilesControll\\ignore.xml";
 
 	if (FileControllComponent::CheckFile(FilePath))
@@ -145,6 +150,7 @@ void XMLComponent::AddDirectoryToIgnore(std::filesystem::path Path)
 
 void XMLComponent::RemoveFileFromIgnore(std::filesystem::path Path)
 {
+	GC->Log->PrintToLog("XMLComponent::RemoveFileFromIgnore()");
 	auto FilePath = FileControllComponent::GetRootDirectory() + "\\FilesControll\\ignore.xml";
 
 	if (FileControllComponent::CheckFile(FilePath))
@@ -176,6 +182,7 @@ void XMLComponent::RemoveFileFromIgnore(std::filesystem::path Path)
 
 void XMLComponent::RemoveDirectoryFromIgnore(std::filesystem::path Path)
 {
+	GC->Log->PrintToLog("XMLComponent::RemoveDirectoryFromIgnore()");
 	auto FilePath = FileControllComponent::GetRootDirectory() + "\\FilesControll\\ignore.xml";
 
 	if (FileControllComponent::CheckFile(FilePath))
@@ -207,6 +214,7 @@ void XMLComponent::RemoveDirectoryFromIgnore(std::filesystem::path Path)
 
 void XMLComponent::SaveIgnoreDocument()
 {
+	GC->Log->PrintToLog("XMLComponent::SaveIgnoreDocument()");
 	auto FilePath = FileControllComponent::GetRootDirectory() + "\\FilesControll\\ignore.xml";
 	if (!IgnoreDocument->Error())
 	{
@@ -216,12 +224,14 @@ void XMLComponent::SaveIgnoreDocument()
 
 void XMLComponent::LoadIgnoreDocument()
 {
+	GC->Log->PrintToLog("XMLComponent::LoadIgnoreDocument()");
 	auto FilePath = FileControllComponent::GetRootDirectory() + "\\FilesControll\\ignore.xml";
 	std::cout<<IgnoreDocument->LoadFile(FilePath.c_str());
 }
 
 std::string XMLComponent::GetFileNameFromPath(std::filesystem::path Path)
 {
+	GC->Log->PrintToLog("XMLComponent::GetFileNameFromPath()");
 	std::string buf;
 	auto str = Path.string();
 	for (int i = str.size() - 1; i >= 0; i--)
@@ -241,6 +251,7 @@ std::string XMLComponent::GetFileNameFromPath(std::filesystem::path Path)
 
 std::vector<std::filesystem::path> XMLComponent::GetIgnoredDirectories()
 {
+	GC->Log->PrintToLog("XMLComponent::GetIgnoredDirectories()");
 	std::vector<std::filesystem::path> result;
 
 	auto FilePath = FileControllComponent::GetRootDirectory() + "\\FilesControll\\ignore.xml";
@@ -272,6 +283,7 @@ std::vector<std::filesystem::path> XMLComponent::GetIgnoredDirectories()
 
 std::vector<std::pair<std::filesystem::path, std::string>> XMLComponent::GetIgnoredFiles()
 {
+	GC->Log->PrintToLog("XMLComponent::GetIgnoredFiles()");
 	std::vector<std::pair<std::filesystem::path, std::string>> result;
 
 	auto FilePath = FileControllComponent::GetRootDirectory() + "\\FilesControll\\ignore.xml";
