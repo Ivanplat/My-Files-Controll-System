@@ -58,4 +58,5 @@ private:
 	void GetAllIgnored();
 public:
 	virtual void StartupModule() override;
+	virtual void Update() override;
 };

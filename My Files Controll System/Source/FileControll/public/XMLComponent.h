@@ -17,6 +17,7 @@ public:
 	
 public:
 	virtual void StartupModule() override;
+	virtual void Update() override;
 private:
 	virtual void InitIgnoreFile();
 	virtual void InitCheckoutFile();

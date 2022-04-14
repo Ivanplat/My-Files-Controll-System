@@ -8,6 +8,7 @@
 #include "FileControll/public/FileControll.h"
 #include "FileControll/public/XMLComponent.h"
 #include "Internet/public/InternetComponent.h"
+#include "CommandParser/public/CommandParserComponent.h"
 
 class GarbageCollector
 {
@@ -17,6 +18,7 @@ public:
 	std::unique_ptr<XMLComponent> XML;
 	std::unique_ptr<FileControllComponent> Files;
 	std::unique_ptr<InternetComponent> Internet;
+	std::unique_ptr<CommandParserComponent> CommandParser;
 private:
 	explicit GarbageCollector() noexcept;
 	virtual ~GarbageCollector() noexcept;

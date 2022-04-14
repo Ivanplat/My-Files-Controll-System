@@ -11,5 +11,7 @@ public:
 	explicit InternetComponent(std::string ComponentName) noexcept : Super(ComponentName) {};
 public:
 	virtual void StartupModule() override;
+	virtual void Update() override;
+public:
 	virtual void DownloadFile(std::filesystem::path FilePath, std::string FilePathOnServer);
 };

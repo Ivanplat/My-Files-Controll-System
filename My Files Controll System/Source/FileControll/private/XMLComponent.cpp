@@ -2,6 +2,8 @@
 
 #include "FileControll/public/FileControll.h"
 
+#include "Core/GarbageCollector.h"
+
 #include <iostream>
 
 using namespace tinyxml2;
@@ -12,6 +14,12 @@ void XMLComponent::StartupModule()
 	InitStatusFile();
 	InitIgnoreFile();
 	InitCheckoutFile();
+}
+
+void XMLComponent::Update()
+{
+	auto GC = GarbageCollector::Instance();
+	GC->Files->Update();
 }
 
 void XMLComponent::InitIgnoreFile()
@@ -107,6 +115,7 @@ void XMLComponent::AddFileToIgnore(std::filesystem::path Path, std::string Hash)
 			FilesElement->InsertFirstChild(FileInfo);
 		}
 		SaveIgnoreDocument();
+		Update();
 	}
 }
 
@@ -130,6 +139,7 @@ void XMLComponent::AddDirectoryToIgnore(std::filesystem::path Path)
 			DirectoriesElement->InsertEndChild(DirectoryInfo);
 		}
 		SaveIgnoreDocument();
+		Update();
 	}
 }
 
@@ -153,11 +163,14 @@ void XMLComponent::RemoveFileFromIgnore(std::filesystem::path Path)
 				}
 				if (FileInfo)
 				{
+					auto CurrentValue = FilesElement->FindAttribute("Count")->IntValue();
+					FilesElement->SetAttribute("Count", --CurrentValue);
 					FilesElement->DeleteChild(FileInfo);
 				}
 			}
 		}
 		SaveIgnoreDocument();
+		Update();
 	}
 }
 
@@ -181,11 +194,14 @@ void XMLComponent::RemoveDirectoryFromIgnore(std::filesystem::path Path)
 				}
 				if (DirectoryInfo)
 				{
+					auto CurrentValue = DirectoriesElement->FindAttribute("Count")->IntValue();
+					DirectoriesElement->SetAttribute("Count", --CurrentValue);
 					DirectoriesElement->DeleteChild(DirectoryInfo);
 				}
 			}
 		}
 		SaveIgnoreDocument();
+		Update();
 	}
 }
 

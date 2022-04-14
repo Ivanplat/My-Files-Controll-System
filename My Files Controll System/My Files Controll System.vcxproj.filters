@@ -22,6 +22,9 @@
     <Filter Include="Source\Internet">
       <UniqueIdentifier>{f3b10f11-5fc2-4fa4-b075-abba6e7d5118}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\CommandParser">
+      <UniqueIdentifier>{da9df5b0-6276-46d4-bd67-31a63e4f0e3f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Core\IBaseComponent.cpp">
@@ -42,6 +45,9 @@
     <ClCompile Include="Source\Core\GarbageCollector.cpp">
       <Filter>Source\Core</Filter>
     </ClCompile>
+    <ClCompile Include="Source\CommandParser\private\CommandParserComponent.cpp">
+      <Filter>Source\CommandParser</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Core\IBaseComponent.h">
@@ -58,6 +64,9 @@
     </ClInclude>
     <ClInclude Include="Source\Core\GarbageCollector.h">
       <Filter>Source\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CommandParser\public\CommandParserComponent.h">
+      <Filter>Source\CommandParser</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

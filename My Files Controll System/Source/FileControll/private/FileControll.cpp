@@ -161,11 +161,13 @@ void FileControllComponent::GetAllIgnored()
 	IgnoredDirectories.insert(ignoredDirectories.begin(), ignoredDirectories.end());
 	IgnoredFiles.insert(ignoredFiles.begin(), ignoredFiles.end());
 
+	std::cout << std::endl;
+	std::cout << std::endl;
 	for (const auto& i : IgnoredDirectories)
 	{
 		std::cout << i.string() << std::endl;
 	}
-
+	std::cout << std::endl;
 	for (const auto& i : IgnoredFiles)
 	{
 		std::cout << i.second << std::endl;
@@ -174,7 +176,7 @@ void FileControllComponent::GetAllIgnored()
 
 void FileControllComponent::StartupModule()
 {
-	GetAllIgnored();
+	Update();
 	//Directories = GetAllDirectories();
 	//for (const auto& i : Files)
 	//{
@@ -182,4 +184,9 @@ void FileControllComponent::StartupModule()
 	//}
 	/*Checker = std::thread(&FileControllComponent::CheckUpdates, this);
 	Checker.join();*/
+}
+
+void FileControllComponent::Update()
+{
+	GetAllIgnored();
 }

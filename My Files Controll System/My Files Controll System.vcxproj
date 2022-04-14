@@ -163,6 +163,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\CommandParser\private\CommandParserComponent.cpp" />
     <ClCompile Include="Source\Core\GarbageCollector.cpp" />
     <ClCompile Include="Source\Core\IBaseComponent.cpp" />
     <ClCompile Include="Source\Core\main.cpp" />
@@ -171,6 +172,7 @@
     <ClCompile Include="Source\Internet\private\InternetComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\CommandParser\public\CommandParserComponent.h" />
     <ClInclude Include="Source\Core\GarbageCollector.h" />
     <ClInclude Include="Source\Core\IBaseComponent.h" />
     <ClInclude Include="Source\FileControll\public\FileControll.h" />

@@ -12,6 +12,10 @@ void InternetComponent::StartupModule()
 {
 }
 
+void InternetComponent::Update()
+{
+}
+
 void InternetComponent::DownloadFile(std::filesystem::path FilePath, std::string FilePathOnServer)
 {
     std::thread tr([&]() 

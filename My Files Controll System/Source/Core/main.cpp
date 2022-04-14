@@ -18,17 +18,16 @@ int main()
 
 	GarbageCollector* GC = GarbageCollector::Instance();
 	GC->XML->StartupModule();
-
-	//GC->XML->AddDirectoryToIgnore("1232\\asda\\asdavv");
-	//GC->XML->AddDirectoryToIgnore("dfgddfg\\dfgd\\vbvbv");
-	//GC->XML->AddDirectoryToIgnore("vvvv\\aaaaa\\ddddd");
-
-	//GC->XML->AddFileToIgnore("ABOBA.txt", "423432");
-	//GC->XML->AddFileToIgnore("ABOBA2.txt", "bcvbf");
-
 	GC->Internet->StartupModule();
 	GC->Files->StartupModule();
 
+	std::string command;
+	while (true)
+	{
+		std::cout << ">$ ";
+		std::getline(std::cin, command);
+		GC->CommandParser->ParseCommand(command);
+	}
 
 	return 0;
 }
