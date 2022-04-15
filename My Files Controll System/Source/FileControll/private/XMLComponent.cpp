@@ -115,7 +115,7 @@ void XMLComponent::AddFileToIgnore(std::filesystem::path Path, std::string Hash)
 			auto FileInfo = IgnoreDocument->NewElement("File");
 			FileInfo->SetAttribute("Path", Path.string().c_str());
 			FileInfo->SetAttribute("Hash", Hash.c_str());
-			FileInfo->SetText(GetFileNameFromPath(Path).c_str());
+			FileInfo->SetText(GC->Files->GetFileNameFromPath(Path).c_str());
 			FilesElement->InsertFirstChild(FileInfo);
 		}
 		SaveIgnoreDocument();
@@ -139,7 +139,7 @@ void XMLComponent::AddDirectoryToIgnore(std::filesystem::path Path)
 		    auto CurrentValue = DirectoriesElement->FindAttribute("Count")->IntValue();
 
 			DirectoriesElement->SetAttribute("Count", ++CurrentValue);
-			DirectoryInfo->SetText(GetFileNameFromPath(Path).c_str());
+			DirectoryInfo->SetText(GC->Files->GetFileNameFromPath(Path).c_str());
 			DirectoryInfo->SetAttribute("Path", Path.string().c_str());
 			DirectoriesElement->InsertEndChild(DirectoryInfo);
 		}
@@ -227,26 +227,6 @@ void XMLComponent::LoadIgnoreDocument()
 	GC->Log->PrintToLog("XMLComponent::LoadIgnoreDocument()");
 	auto FilePath = FileControllComponent::GetRootDirectory() + "\\FilesControll\\ignore.xml";
 	std::cout<<IgnoreDocument->LoadFile(FilePath.c_str());
-}
-
-std::string XMLComponent::GetFileNameFromPath(std::filesystem::path Path)
-{
-	GC->Log->PrintToLog("XMLComponent::GetFileNameFromPath()");
-	std::string buf;
-	auto str = Path.string();
-	for (int i = str.size() - 1; i >= 0; i--)
-	{
-		if (str[i] != '\\')
-		{
-			buf += str[i];
-		}
-		else
-		{
-			break;
-		}
-	}
-	std::reverse(buf.begin(), buf.end());
-	return buf;
 }
 
 std::vector<std::filesystem::path> XMLComponent::GetIgnoredDirectories()

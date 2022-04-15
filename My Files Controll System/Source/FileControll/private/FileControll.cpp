@@ -53,7 +53,7 @@ void FileControllComponent::CreateArchiveFromFile(std::filesystem::path Path)
 {
 	int errors;
 	auto z = zip_open(Path.string().c_str(), ZIP_CREATE, &errors);
-	auto FileName = GC->XML->GetFileNameFromPath(Path);
+	auto FileName = GetFileNameFromPath(Path);
 
 	zip_source_t* s;
 	const char buf[] = "bufferstring";
@@ -66,6 +66,26 @@ void FileControllComponent::CreateArchiveFromFile(std::filesystem::path Path)
 	std::cout<<zip_close(z)<<std::endl;
 	std::cout << errors << std::endl;
 	
+}
+
+std::string FileControllComponent::GetFileNameFromPath(std::filesystem::path Path)
+{
+	GC->Log->PrintToLog("FileControllComponent::GetFileNameFromPath()");
+	std::string buf;
+	auto str = Path.string();
+	for (int i = str.size() - 1; i >= 0; i--)
+	{
+		if (str[i] != '\\')
+		{
+			buf += str[i];
+		}
+		else
+		{
+			break;
+		}
+	}
+	std::reverse(buf.begin(), buf.end());
+	return buf;
 }
 
 

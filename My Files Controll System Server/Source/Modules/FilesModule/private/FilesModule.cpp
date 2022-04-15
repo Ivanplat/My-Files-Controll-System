@@ -31,7 +31,7 @@ void FilesModule::CreateZipFromFile(std::filesystem::path Path)
 {
 	int errors;
 	auto z = zip_open(Path.string().c_str(), ZIP_CREATE, &errors);
-	auto FileName = std::string("");
+	auto FileName = GetFileNameFromPath(Path);
 
 	zip_source_t* s;
 	const char buf[] = "bufferstring";
@@ -42,6 +42,36 @@ void FilesModule::CreateZipFromFile(std::filesystem::path Path)
 		printf("error adding file: %s\n", zip_strerror(z));
 	}
 	zip_close(z);
+}
+
+void FilesModule::CrateDirectory(std::filesystem::path Path)
+{
+	std::filesystem::create_directory(Path);
+}
+
+void FilesModule::DeleteDirectory(std::filesystem::path Path)
+{
+	std::filesystem::remove_all(Path);
+}
+
+std::string FilesModule::GetFileNameFromPath(std::filesystem::path Path)
+{
+	//GC->Log->PrintToLog("FilesModule::GetFileNameFromPath()");
+	std::string buf;
+	auto str = Path.string();
+	for (int i = str.size() - 1; i >= 0; i--)
+	{
+		if (str[i] != '\\')
+		{
+			buf += str[i];
+		}
+		else
+		{
+			break;
+		}
+	}
+	std::reverse(buf.begin(), buf.end());
+	return buf;
 }
 
 const bool FilesModule::CheckDirectory(std::filesystem::path Path) const

@@ -29,7 +29,6 @@ public:
 	virtual void RemoveDirectoryFromIgnore(std::filesystem::path Path);
 	void SaveIgnoreDocument();
 	void LoadIgnoreDocument();
-	std::string GetFileNameFromPath(std::filesystem::path Path);
 	std::vector<std::filesystem::path> GetIgnoredDirectories();
 	std::vector<std::pair<std::filesystem::path, std::string>> GetIgnoredFiles();
 protected:

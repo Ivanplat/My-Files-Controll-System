@@ -98,7 +98,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
-      <AdditionalIncludeDirectories>C:\Users\EventGraph\source\repos\My Files Controll System\My Files Controll System\Source;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\EventGraph\source\repos\My Files Controll System\My Files Controll System\Source;C:\Users\EventGraph\source\repos\My Files Controll System\Includes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader>Create</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
     </ClCompile>
@@ -118,7 +118,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
-      <AdditionalIncludeDirectories>C:\Users\EventGraph\source\repos\My Files Controll System\My Files Controll System\Source;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\EventGraph\source\repos\My Files Controll System\My Files Controll System\Source;C:\Users\EventGraph\source\repos\My Files Controll System\Includes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader>Create</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
     </ClCompile>
@@ -138,7 +138,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
-      <AdditionalIncludeDirectories>C:\Users\EventGraph\source\repos\My Files Controll System\My Files Controll System\Source;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\EventGraph\source\repos\My Files Controll System\My Files Controll System\Source;C:\Users\EventGraph\source\repos\My Files Controll System\Includes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader>Create</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
     </ClCompile>
@@ -158,7 +158,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
-      <AdditionalIncludeDirectories>C:\Users\EventGraph\source\repos\My Files Controll System\My Files Controll System\Source;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\EventGraph\source\repos\My Files Controll System\My Files Controll System\Source;C:\Users\EventGraph\source\repos\My Files Controll System\Includes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader>Create</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
     </ClCompile>
@@ -171,6 +171,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\Includes\AES\AES.cpp" />
+    <ClCompile Include="..\Includes\SHA256\SHA256.cpp" />
     <ClCompile Include="Source\CommandParser\private\CommandParserComponent.cpp" />
     <ClCompile Include="Source\Core\GarbageCollector.cpp" />
     <ClCompile Include="Source\Core\IBaseComponent.cpp" />
@@ -183,6 +185,8 @@
     <ClCompile Include="Source\pch.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\Includes\AES\AES.h" />
+    <ClInclude Include="..\Includes\SHA256\SHA256.h" />
     <ClInclude Include="Source\CommandParser\public\CommandParserComponent.h" />
     <ClInclude Include="Source\Core\GarbageCollector.h" />
     <ClInclude Include="Source\Core\IBaseComponent.h" />

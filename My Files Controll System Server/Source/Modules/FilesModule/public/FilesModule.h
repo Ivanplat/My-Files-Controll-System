@@ -17,6 +17,9 @@ public:
 	virtual void CreateFile(std::filesystem::path Path);
 	virtual void DeleteFile(std::filesystem::path Path);
 	virtual void CreateZipFromFile(std::filesystem::path Path);
+	virtual void CrateDirectory(std::filesystem::path Path);
+	virtual void DeleteDirectory(std::filesystem::path Path);
+	std::string GetFileNameFromPath(std::filesystem::path Path);
 public:
 	const bool CheckFile(std::filesystem::path Path) const;
 	const bool CheckDirectory(std::filesystem::path Path) const;

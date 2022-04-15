@@ -25,6 +25,12 @@
     <Filter Include="Source\CommandParser">
       <UniqueIdentifier>{da9df5b0-6276-46d4-bd67-31a63e4f0e3f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\SHA256">
+      <UniqueIdentifier>{143758bb-034b-495a-868d-deaf6ef6a664}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\AES">
+      <UniqueIdentifier>{fd850a6b-c00c-4bac-ac59-b7a4ab47def7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Core\IBaseComponent.cpp">
@@ -57,6 +63,12 @@
     <ClCompile Include="Source\pch.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="..\Includes\AES\AES.cpp">
+      <Filter>Source\AES</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Includes\SHA256\SHA256.cpp">
+      <Filter>Source\SHA256</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Core\IBaseComponent.h">
@@ -85,6 +97,12 @@
     </ClInclude>
     <ClInclude Include="Source\pch.h">
       <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Includes\SHA256\SHA256.h">
+      <Filter>Source\SHA256</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Includes\AES\AES.h">
+      <Filter>Source\AES</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

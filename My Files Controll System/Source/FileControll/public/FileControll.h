@@ -36,6 +36,7 @@ public:
 	static void CheckUpdates(FileControllComponent* self);
 	static void CreateFile(std::string FileName);
 	void CreateArchiveFromFile(std::filesystem::path Path);
+	std::string GetFileNameFromPath(std::filesystem::path Path);
 protected:
 	static std::set<std::map<std::filesystem::path, std::string>> Files;
 	static std::set<std::filesystem::path> Directories;
