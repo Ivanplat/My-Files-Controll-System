@@ -10,13 +10,15 @@ enum class CommandType
 {
 	Error = -1,
 	AddIgnoredFile = 0,
-	AddIgnoredDirectory = 1
+	AddIgnoredDirectory = 1,
+	Init = 16
 };
 
 enum class CommandArguments
 {
 	Mod = 0,
-	Force = 1
+	Force = 1,
+	Name = 2
 };
 
 
@@ -32,5 +34,7 @@ public:
 	virtual void ParseCommand(std::string& Command);
 	virtual CommandType ParseCommandType(std::string& Command);
 	virtual std::filesystem::path GetDirectoryToIgnore(std::string& Command);
+	virtual std::filesystem::path GetInitialRepositoryPath(std::string& Command);
+	virtual std::string GetInitialRepositoryName(std::string& Command);
 	virtual std::set<CommandArguments> GetCommandArguments(std::set<std::string> Arguments);
 };

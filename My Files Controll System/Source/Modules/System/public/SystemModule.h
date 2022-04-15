@@ -76,5 +76,7 @@ public:
 	virtual void StartupModule() override;
 	virtual void Update() override;
 public:
+	void InitNewRepository(std::filesystem::path RepositoryPath, std::string RepositoryName);
+public:
 	FDateTime GetCurrentTime();
 };

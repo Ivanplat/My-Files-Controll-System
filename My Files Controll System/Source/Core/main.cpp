@@ -43,5 +43,15 @@ int main()
 {
 	setlocale(LC_ALL, "Russian");
 
+	GC->XML->StartupModule();
+
+	while (true)
+	{
+		std::cout << ">$ ";
+		std::string input;
+		std::getline(std::cin, input);
+		GC->CommandParser->ParseCommand(input);
+	}
+
 	return 0;
 }

@@ -21,7 +21,7 @@ public:
 private:
 	virtual void InitIgnoreFile();
 	virtual void InitCheckoutFile();
-	virtual void InitStatusFile();
+	virtual void InitStatusFile(std::string RepositoryName = std::string());
 public:
 	virtual void AddFileToIgnore(std::filesystem::path Path, std::string Hash);
 	virtual void AddDirectoryToIgnore(std::filesystem::path Path);
@@ -29,6 +29,7 @@ public:
 	virtual void RemoveDirectoryFromIgnore(std::filesystem::path Path);
 	void SaveIgnoreDocument();
 	void LoadIgnoreDocument();
+	void InitializeFiles(std::filesystem::path RepositoryPath, std::string RepositoryName);
 	std::vector<std::filesystem::path> GetIgnoredDirectories();
 	std::vector<std::pair<std::filesystem::path, std::string>> GetIgnoredFiles();
 protected:

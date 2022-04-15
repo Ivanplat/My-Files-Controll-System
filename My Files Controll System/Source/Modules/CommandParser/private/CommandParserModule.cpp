@@ -51,10 +51,6 @@ void CommandParserModule::ParseCommand(std::string& Command)
 	auto Type = ParseCommandType(parsed[1]);
 	
 	std::set<CommandArguments> Args;
-	if (parsed.size() > 3)
-	{
-		Args = GetCommandArguments(std::set<std::string>(parsed.begin() + 3, parsed.end()));
-	}
 
 	switch (Type)
 	{
@@ -65,12 +61,27 @@ void CommandParserModule::ParseCommand(std::string& Command)
 		{
 			std::cout << "Invalit path" << std::endl; return;
 		}
+		if (parsed.size() > 3)
+		{
+			Args = GetCommandArguments(std::set<std::string>(parsed.begin() + 3, parsed.end()));
+		}
 		auto Path = GetDirectoryToIgnore(parsed[2]);
 		if (Path != "")
 		{
 			GC->XML->AddDirectoryToIgnore(Path);
 		}
 	} break;
+	case CommandType::Init:
+	{
+		if (parsed.size() < 5)
+		{
+			std::cout << "Invalit syntax" << std::endl; return;
+		}
+		Args = GetCommandArguments(std::set<std::string>(parsed.begin() + 4, parsed.begin() + 4));
+		auto RepositoryPath = GetInitialRepositoryPath(parsed[2]);
+		auto RepositoryName = GetInitialRepositoryName(parsed[4]);
+		GC->System->InitNewRepository(RepositoryPath, RepositoryName);
+	}break;
 	}
 
 	std::cout << std::endl;
@@ -85,6 +96,10 @@ CommandType CommandParserModule::ParseCommandType(std::string& Command)
 	if (Command == "addignoredfile" || Command == "aif")
 	{
 		return CommandType::AddIgnoredFile;
+	}
+	if (Command == "init" || Command == "i")
+	{
+		return CommandType::Init;
 	}
 	return CommandType::Error;
 }
@@ -105,6 +120,30 @@ std::filesystem::path CommandParserModule::GetDirectoryToIgnore(std::string& Com
 	}
 }
 
+std::filesystem::path CommandParserModule::GetInitialRepositoryPath(std::string& Command)
+{
+	Command.erase(std::remove(Command.begin(), Command.end(), '\"'));
+	Command.erase(std::remove(Command.begin(), Command.end(), '\"'));
+	std::cout << Command << std::endl;
+	if (FileControllModule::CheckDirectory(Command))
+	{
+		return Command;
+	}
+	else
+	{
+		std::cout << "Invalid path" << std::endl;
+		return std::filesystem::path();
+	}
+}
+
+std::string CommandParserModule::GetInitialRepositoryName(std::string& Command)
+{
+	Command.erase(std::remove(Command.begin(), Command.end(), '\"'));
+	Command.erase(std::remove(Command.begin(), Command.end(), '\"'));
+	std::cout << Command << std::endl;
+	return Command;
+}
+
 std::set<CommandArguments> CommandParserModule::GetCommandArguments(std::set<std::string> Arguments)
 {
 	std::set<CommandArguments> result;
@@ -115,6 +154,10 @@ std::set<CommandArguments> CommandParserModule::GetCommandArguments(std::set<std
 	if (Arguments.contains("-f") || Arguments.contains("-force"))
 	{
 		result.insert(CommandArguments::Force);
+	}
+	if (Arguments.contains("-n") || Arguments.contains("-name"))
+	{
+		result.insert(CommandArguments::Name);
 	}
 	return std::set<CommandArguments>();
 }

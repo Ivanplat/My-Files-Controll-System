@@ -12,13 +12,14 @@ std::set<std::filesystem::path> FileControllModule::AddedDirectories = std::set<
 std::set<std::filesystem::path> FileControllModule::RemovedDirectories = std::set<std::filesystem::path>();
 std::set<std::filesystem::path> FileControllModule::ChangedDirectories = std::set<std::filesystem::path>();
 std::set<std::map<std::filesystem::path, std::string>> FileControllModule::Files = std::set<std::map<std::filesystem::path, std::string>>();
+std::filesystem::path FileControllModule::RootPath = std::filesystem::path();
 
 const bool FileControllModule::CheckFile(std::filesystem::path FilePath)
 {
 	return std::filesystem::is_regular_file(FilePath) || std::filesystem::is_character_file(FilePath) || std::filesystem::is_block_file(FilePath);
 }
 
-const bool FileControllModule::CheckDirectory(std::string DirectoryPath)
+const bool FileControllModule::CheckDirectory(std::filesystem::path DirectoryPath)
 {
 	return std::filesystem::is_directory(DirectoryPath);
 }
@@ -28,9 +29,9 @@ std::string FileControllModule::GetCurrentDirectory()
 	return std::filesystem::current_path().string();
 }
 
-std::string FileControllModule::GetRootDirectory()
+std::filesystem::path FileControllModule::GetRootDirectory()
 {
-	return GetCurrentDirectory();
+	return RootPath;
 }
 
 void FileControllModule::CheckUpdates(FileControllModule* self)
@@ -43,9 +44,11 @@ void FileControllModule::CheckUpdates(FileControllModule* self)
 	}
 }
 
-void FileControllModule::CreateFile(std::string FileName)
+void FileControllModule::CreateFile(std::string FilePath)
 {
-	std::ofstream outfile(FileName);
+	std::cout << FilePath << " ";
+	std::ofstream outfile(FilePath);
+	std::cout << outfile.is_open()<<std::endl;
 	outfile.close();
 }
 
@@ -86,6 +89,11 @@ std::string FileControllModule::GetFileNameFromPath(std::filesystem::path Path)
 	}
 	std::reverse(buf.begin(), buf.end());
 	return buf;
+}
+
+void FileControllModule::SetRootPath(std::filesystem::path NewRootPath)
+{
+	RootPath = NewRootPath;
 }
 
 

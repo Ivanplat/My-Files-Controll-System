@@ -30,13 +30,14 @@ public:
 	explicit FileControllModule(std::string ComponentName) noexcept : Super(ComponentName) {};
 public:
 	static const bool CheckFile(std::filesystem::path FilePath);
-	static const bool CheckDirectory(std::string  DirectoryPath);
+	static const bool CheckDirectory(std::filesystem::path  DirectoryPath);
 	static std::string GetCurrentDirectory();
-	static std::string GetRootDirectory();
+	static std::filesystem::path GetRootDirectory();
 	static void CheckUpdates(FileControllModule* self);
-	static void CreateFile(std::string FileName);
+	static void CreateFile(std::string FilePath);
 	void CreateArchiveFromFile(std::filesystem::path Path);
 	std::string GetFileNameFromPath(std::filesystem::path Path);
+	void SetRootPath(std::filesystem::path NewRootPath);
 protected:
 	static std::set<std::map<std::filesystem::path, std::string>> Files;
 	static std::set<std::filesystem::path> Directories;
@@ -45,6 +46,7 @@ protected:
 	static std::set<std::filesystem::path> AddedDirectories;
 	static std::set<std::filesystem::path> RemovedDirectories;
 	static std::set<std::filesystem::path> ChangedDirectories;
+	static std::filesystem::path RootPath;
 	std::thread Checker;
 private:
 	std::set<std::filesystem::path> GetAllDirectories();
