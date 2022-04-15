@@ -1,20 +1,20 @@
 #include "pch.h"
-#include "Internet/public/InternetComponent.h"
+#include "Modules/Client/public/ClientModule.h"
 #include <urlmon.h>
 #include <tchar.h>
 
 
 #pragma comment (lib, "urlmon.lib")
 
-void InternetComponent::StartupModule()
+void ClientModule::StartupModule()
 {
 }
 
-void InternetComponent::Update()
+void ClientModule::Update()
 {
 }
 
-void InternetComponent::DownloadFile(std::filesystem::path FilePath, std::string FilePathOnServer)
+void ClientModule::DownloadFile(std::filesystem::path FilePath, std::string FilePathOnServer)
 {
     std::thread tr([&]() 
     {

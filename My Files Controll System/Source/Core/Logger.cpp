@@ -1,8 +1,8 @@
 #include "pch.h"
 #include "Logger.h"
 
-#include "FileControll/public/FileControll.h"
-#include "SystemComponent.h"
+#include "Modules/FileControll/public/FileControllModule.h"
+#include "Modules/System/public/SystemModule.h"
 #include "GarbageCollector.h"
 
 Logger* Logger::Instance()
@@ -22,7 +22,7 @@ void Logger::PrintToLog(std::string LogString)
 void Logger::CreateLogFile()
 {
 	auto Time = GC->System->GetCurrentTime().ToString();
-	auto logPath = FileControllComponent::GetRootDirectory() + "\\FilesControll\\log\\log_" + Time;
+	auto logPath = FileControllModule::GetRootDirectory() + "\\FilesControll\\log\\log_" + Time;
 	CurrentLogFilePath = logPath;
 	std::ofstream out(logPath, std::ios::app);
 	out << "Monolit file controll log" << std::endl;

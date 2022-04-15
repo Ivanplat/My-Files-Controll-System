@@ -1,6 +1,6 @@
 #pragma once
 #include "pch.h"
-#include "Core/IBaseComponent.h"
+#include "Modules/IBaseModule.h"
 #include <set>
 #include <thread>
 #include <filesystem>
@@ -24,16 +24,16 @@ std::set<T> operator +(std::set<T>& reference, std::set<T>& items_to_add)
 }
 
 
-class FileControllComponent : public virtual IBaseComponent
+class FileControllModule : public virtual IBaseModule
 {
 public:
-	explicit FileControllComponent(std::string ComponentName) noexcept : Super(ComponentName) {};
+	explicit FileControllModule(std::string ComponentName) noexcept : Super(ComponentName) {};
 public:
 	static const bool CheckFile(std::filesystem::path FilePath);
 	static const bool CheckDirectory(std::string  DirectoryPath);
 	static std::string GetCurrentDirectory();
 	static std::string GetRootDirectory();
-	static void CheckUpdates(FileControllComponent* self);
+	static void CheckUpdates(FileControllModule* self);
 	static void CreateFile(std::string FileName);
 	void CreateArchiveFromFile(std::filesystem::path Path);
 	std::string GetFileNameFromPath(std::filesystem::path Path);

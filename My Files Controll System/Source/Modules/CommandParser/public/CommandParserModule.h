@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Core/IBaseComponent.h"
+#include "Modules/IBaseModule.h"
 
 #include <filesystem>
 #include <set>
@@ -21,10 +21,10 @@ enum class CommandArguments
 
 
 
-class CommandParserComponent : public virtual IBaseComponent
+class CommandParserModule : public virtual IBaseModule
 {
 public:
-	explicit CommandParserComponent(std::string ComponentName) noexcept : Super(ComponentName) {}
+	explicit CommandParserModule(std::string ComponentName) noexcept : Super(ComponentName) {}
 public:
 	virtual void StartupModule() override;
 	virtual void Update() override;

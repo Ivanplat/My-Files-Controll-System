@@ -116,6 +116,10 @@ public:
     void RemoveUnusedChars(std::string& str, int count);
 
     std::string ToString(unsigned char* ptr);
+
+    std::string KeyGenerator();
+
+    std::string VectorGenerator();
 };
 
 const unsigned char sbox[16][16] = {

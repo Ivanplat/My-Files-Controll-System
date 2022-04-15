@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "AES.h"
 
+#include <random>
+
 AES::AES(AESKeyLength keyLength) {
     this->Nb = 4;
     switch (keyLength) {
@@ -455,6 +457,32 @@ void AES::RemoveUnusedChars(std::string& str, int count)
 std::string AES::ToString(unsigned char* ptr)
 {
     return std::string(reinterpret_cast<char*>(ptr));
+}
+
+std::string AES::KeyGenerator()
+{
+    std::string result;
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> dist(97, 122);
+    for (size_t i = 0; i < 32; i++)
+    {
+        result += static_cast<char>(dist(gen));
+    }
+    return result;
+}
+
+std::string AES::VectorGenerator()
+{
+    std::string result;
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> dist(97, 122);
+    for (size_t i = 0; i < 16; i++)
+    {
+        result += static_cast<char>(dist(gen));
+    }
+    return result;
 }
 
 std::vector<unsigned char> AES::EncryptECB(std::vector<unsigned char> in,

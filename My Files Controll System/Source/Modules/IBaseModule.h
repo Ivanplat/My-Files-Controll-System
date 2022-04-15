@@ -1,11 +1,11 @@
 #pragma once
 #include <string>
 
-class IBaseComponent
+class IBaseModule
 {
 public:
-	explicit IBaseComponent(std::string ComponentName) noexcept;
-	virtual ~IBaseComponent() noexcept;
+	explicit IBaseModule(std::string ComponentName) noexcept;
+	virtual ~IBaseModule() noexcept;
 public:
 	std::string GetName() { return ComponentName;  };
 	virtual void StartupModule() = 0;
@@ -15,4 +15,4 @@ protected:
 	std::string ComponentName;
 };
 
-typedef IBaseComponent Super;
+typedef IBaseModule Super;

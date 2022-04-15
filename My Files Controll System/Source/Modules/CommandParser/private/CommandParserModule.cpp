@@ -1,15 +1,15 @@
 #include "pch.h"
-#include "CommandParser/public/CommandParserComponent.h"
+#include "Modules/CommandParser/public/CommandParserModule.h"
 
-void CommandParserComponent::StartupModule()
+void CommandParserModule::StartupModule()
 {
 }
 
-void CommandParserComponent::Update()
+void CommandParserModule::Update()
 {
 }
 
-void CommandParserComponent::ParseCommand(std::string& Command)
+void CommandParserModule::ParseCommand(std::string& Command)
 {
 	std::string buf;
 	std::vector<std::string> parsed;
@@ -76,7 +76,7 @@ void CommandParserComponent::ParseCommand(std::string& Command)
 	std::cout << std::endl;
 }
 
-CommandType CommandParserComponent::ParseCommandType(std::string& Command)
+CommandType CommandParserModule::ParseCommandType(std::string& Command)
 {
 	if(Command == "addignoreddir" || Command == "aid")
 	{ 
@@ -89,12 +89,12 @@ CommandType CommandParserComponent::ParseCommandType(std::string& Command)
 	return CommandType::Error;
 }
 
-std::filesystem::path CommandParserComponent::GetDirectoryToIgnore(std::string& Command)
+std::filesystem::path CommandParserModule::GetDirectoryToIgnore(std::string& Command)
 {
 	std::cout << Command << std::endl;
 	Command.erase(std::remove(Command.begin(), Command.end(), '\"'));
 	Command.erase(std::remove(Command.begin(), Command.end(), '\"'));
-	if (FileControllComponent::CheckDirectory(Command))
+	if (FileControllModule::CheckDirectory(Command))
 	{
 		return Command;
 	}
@@ -105,7 +105,7 @@ std::filesystem::path CommandParserComponent::GetDirectoryToIgnore(std::string& 
 	}
 }
 
-std::set<CommandArguments> CommandParserComponent::GetCommandArguments(std::set<std::string> Arguments)
+std::set<CommandArguments> CommandParserModule::GetCommandArguments(std::set<std::string> Arguments)
 {
 	std::set<CommandArguments> result;
 	if (Arguments.contains("-m"))

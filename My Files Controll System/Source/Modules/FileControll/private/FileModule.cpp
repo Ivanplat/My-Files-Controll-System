@@ -1,39 +1,39 @@
 #include "pch.h"
-#include "FileControll/public/FileControll.h"
+#include "Modules/FileControll/public/FileControllModule.h"
 #include "Core/GarbageCollector.h"
 
 #include "zip.h"
 
 
-std::set<std::pair<std::filesystem::path, std::string>> FileControllComponent::IgnoredFiles = std::set<std::pair<std::filesystem::path, std::string>>();
-std::set<std::filesystem::path> FileControllComponent::IgnoredDirectories = std::set<std::filesystem::path>();
-std::set<std::filesystem::path> FileControllComponent::Directories = std::set<std::filesystem::path>(); 
-std::set<std::filesystem::path> FileControllComponent::AddedDirectories = std::set<std::filesystem::path>();
-std::set<std::filesystem::path> FileControllComponent::RemovedDirectories = std::set<std::filesystem::path>();
-std::set<std::filesystem::path> FileControllComponent::ChangedDirectories = std::set<std::filesystem::path>();
-std::set<std::map<std::filesystem::path, std::string>> FileControllComponent::Files = std::set<std::map<std::filesystem::path, std::string>>();
+std::set<std::pair<std::filesystem::path, std::string>> FileControllModule::IgnoredFiles = std::set<std::pair<std::filesystem::path, std::string>>();
+std::set<std::filesystem::path> FileControllModule::IgnoredDirectories = std::set<std::filesystem::path>();
+std::set<std::filesystem::path> FileControllModule::Directories = std::set<std::filesystem::path>();
+std::set<std::filesystem::path> FileControllModule::AddedDirectories = std::set<std::filesystem::path>();
+std::set<std::filesystem::path> FileControllModule::RemovedDirectories = std::set<std::filesystem::path>();
+std::set<std::filesystem::path> FileControllModule::ChangedDirectories = std::set<std::filesystem::path>();
+std::set<std::map<std::filesystem::path, std::string>> FileControllModule::Files = std::set<std::map<std::filesystem::path, std::string>>();
 
-const bool FileControllComponent::CheckFile(std::filesystem::path FilePath)
+const bool FileControllModule::CheckFile(std::filesystem::path FilePath)
 {
 	return std::filesystem::is_regular_file(FilePath) || std::filesystem::is_character_file(FilePath) || std::filesystem::is_block_file(FilePath);
 }
 
-const bool FileControllComponent::CheckDirectory(std::string DirectoryPath)
+const bool FileControllModule::CheckDirectory(std::string DirectoryPath)
 {
 	return std::filesystem::is_directory(DirectoryPath);
 }
 
-std::string FileControllComponent::GetCurrentDirectory()
+std::string FileControllModule::GetCurrentDirectory()
 {
 	return std::filesystem::current_path().string();
 }
 
-std::string FileControllComponent::GetRootDirectory()
+std::string FileControllModule::GetRootDirectory()
 {
 	return GetCurrentDirectory();
 }
 
-void FileControllComponent::CheckUpdates(FileControllComponent* self)
+void FileControllModule::CheckUpdates(FileControllModule* self)
 {
 	while (true)
 	{
@@ -43,13 +43,13 @@ void FileControllComponent::CheckUpdates(FileControllComponent* self)
 	}
 }
 
-void FileControllComponent::CreateFile(std::string FileName)
+void FileControllModule::CreateFile(std::string FileName)
 {
 	std::ofstream outfile(FileName);
 	outfile.close();
 }
 
-void FileControllComponent::CreateArchiveFromFile(std::filesystem::path Path)
+void FileControllModule::CreateArchiveFromFile(std::filesystem::path Path)
 {
 	int errors;
 	auto z = zip_open(Path.string().c_str(), ZIP_CREATE, &errors);
@@ -68,7 +68,7 @@ void FileControllComponent::CreateArchiveFromFile(std::filesystem::path Path)
 	
 }
 
-std::string FileControllComponent::GetFileNameFromPath(std::filesystem::path Path)
+std::string FileControllModule::GetFileNameFromPath(std::filesystem::path Path)
 {
 	GC->Log->PrintToLog("FileControllComponent::GetFileNameFromPath()");
 	std::string buf;
@@ -111,7 +111,7 @@ bool SpecialCheck(std::set<std::filesystem::path> Dir, std::filesystem::path Pat
 	return false;
 }
 
-std::set<std::filesystem::path> FileControllComponent::GetAllDirectories()
+std::set<std::filesystem::path> FileControllModule::GetAllDirectories()
 {
 	auto FileControllDirectory = GetRootDirectory();
 	std::set<std::filesystem::path> Temp;
@@ -129,12 +129,12 @@ std::set<std::filesystem::path> FileControllComponent::GetAllDirectories()
 	return Temp;
 }
 
-void FileControllComponent::GetAllFiles()
+void FileControllModule::GetAllFiles()
 {
 
 }
 
-const bool FileControllComponent::CheckEachDirectory(std::string Directory)
+const bool FileControllModule::CheckEachDirectory(std::string Directory)
 {
 	for (const auto& i : std::filesystem::recursive_directory_iterator(Directory))
 	{
@@ -150,7 +150,7 @@ const bool FileControllComponent::CheckEachDirectory(std::string Directory)
 	return false;
 }
 
-void FileControllComponent::IsDirectoriesChanged()
+void FileControllModule::IsDirectoriesChanged()
 {
 	auto NewDirs = GetAllDirectories();
 	std::cout << "DIRECTORIES REMOVED" << std::endl;
@@ -188,7 +188,7 @@ void FileControllComponent::IsDirectoriesChanged()
 
 }
 
-void FileControllComponent::GetAllIgnored()
+void FileControllModule::GetAllIgnored()
 {
 	auto ignoredDirectories = GC->XML->GetIgnoredDirectories();
 	auto ignoredFiles = GC->XML->GetIgnoredFiles();
@@ -208,7 +208,7 @@ void FileControllComponent::GetAllIgnored()
 	}
 }
 
-void FileControllComponent::StartupModule()
+void FileControllModule::StartupModule()
 {
 	Update();
 	//Directories = GetAllDirectories();
@@ -220,7 +220,7 @@ void FileControllComponent::StartupModule()
 	Checker.join();*/
 }
 
-void FileControllComponent::Update()
+void FileControllModule::Update()
 {
 	GetAllIgnored();
 }

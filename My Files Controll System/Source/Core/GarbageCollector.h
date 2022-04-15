@@ -1,11 +1,11 @@
 #pragma once
 
-#include "Core/IBaseComponent.h"
-#include "FileControll/public/FileControll.h"
-#include "FileControll/public/XMLComponent.h"
-#include "Internet/public/InternetComponent.h"
-#include "CommandParser/public/CommandParserComponent.h"
-#include "SystemComponent.h"
+#include "Modules/IBaseModule.h"
+#include "Modules/FileControll/public/FileControllModule.h"
+#include "Modules/FileControll/public/XMLModule.h"
+#include "Modules/Client/public/ClientModule.h"
+#include "Modules/CommandParser/public/CommandParserModule.h"
+#include "Modules/System/public/SystemModule.h"
 #include "Logger.h"
 
 class GarbageCollector
@@ -13,11 +13,11 @@ class GarbageCollector
 public:
 	static GarbageCollector* Instance();
 public:
-	std::unique_ptr<XMLComponent> XML;
-	std::unique_ptr<FileControllComponent> Files;
-	std::unique_ptr<InternetComponent> Internet;
-	std::unique_ptr<CommandParserComponent> CommandParser;
-	std::unique_ptr<SystemComponent> System;
+	std::unique_ptr<XMLModule> XML;
+	std::unique_ptr<FileControllModule> Files;
+	std::unique_ptr<ClientModule> Client;
+	std::unique_ptr<CommandParserModule> CommandParser;
+	std::unique_ptr<SystemModule> System;
 	Logger* Log;
 private:
 	explicit GarbageCollector() noexcept;

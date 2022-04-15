@@ -16,93 +16,120 @@
     <Filter Include="Source\Core">
       <UniqueIdentifier>{827c0c19-5c7b-4169-abc5-d6bbfb54ac93}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\FileControll">
-      <UniqueIdentifier>{abe4da7d-f8bf-47ab-8a04-316cbc0a199b}</UniqueIdentifier>
+    <Filter Include="Source\Includes">
+      <UniqueIdentifier>{d307251f-2373-44af-bbeb-c1d002375de0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Internet">
-      <UniqueIdentifier>{f3b10f11-5fc2-4fa4-b075-abba6e7d5118}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\CommandParser">
-      <UniqueIdentifier>{da9df5b0-6276-46d4-bd67-31a63e4f0e3f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\SHA256">
+    <Filter Include="Source\Includes\SHA256">
       <UniqueIdentifier>{143758bb-034b-495a-868d-deaf6ef6a664}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\AES">
+    <Filter Include="Source\Includes\AES">
       <UniqueIdentifier>{fd850a6b-c00c-4bac-ac59-b7a4ab47def7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Modules">
+      <UniqueIdentifier>{d2d24d57-dd7c-4815-991c-c739dcf566b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Modules\CommandParser">
+      <UniqueIdentifier>{da9df5b0-6276-46d4-bd67-31a63e4f0e3f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Modules\FileControll">
+      <UniqueIdentifier>{abe4da7d-f8bf-47ab-8a04-316cbc0a199b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Modules\Client">
+      <UniqueIdentifier>{f3b10f11-5fc2-4fa4-b075-abba6e7d5118}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Modules\System">
+      <UniqueIdentifier>{fb6f7f53-1917-47e9-a42b-4eae63329955}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Modules\System\public">
+      <UniqueIdentifier>{8ab7880b-80d0-4209-8755-6cc19395db89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Modules\System\private">
+      <UniqueIdentifier>{4e780f4e-89ae-4bb5-a668-71c09b85db5b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Modules\FileControll\public">
+      <UniqueIdentifier>{f934b153-3270-4fa1-a564-9f011a4f7a4c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Modules\FileControll\private">
+      <UniqueIdentifier>{bf7be132-71c9-45c0-b450-6bd172df1512}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Modules\CommandParser\public">
+      <UniqueIdentifier>{f52cd18a-d451-4d3a-bc9f-01360cee6382}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Modules\CommandParser\private">
+      <UniqueIdentifier>{deeb55ca-df35-41aa-968f-a37c596d6c6d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Source\Core\IBaseComponent.cpp">
-      <Filter>Source\Core</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Core\main.cpp">
       <Filter>Source\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\FileControll\private\FileControll.cpp">
-      <Filter>Source\FileControll</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\FileControll\private\XMLComponent.cpp">
-      <Filter>Source\FileControll</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Internet\private\InternetComponent.cpp">
-      <Filter>Source\Internet</Filter>
     </ClCompile>
     <ClCompile Include="Source\Core\GarbageCollector.cpp">
       <Filter>Source\Core</Filter>
     </ClCompile>
-    <ClCompile Include="Source\CommandParser\private\CommandParserComponent.cpp">
-      <Filter>Source\CommandParser</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Core\Logger.cpp">
-      <Filter>Source\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Core\SystemComponent.cpp">
       <Filter>Source\Core</Filter>
     </ClCompile>
     <ClCompile Include="Source\pch.cpp">
       <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="..\Includes\AES\AES.cpp">
-      <Filter>Source\AES</Filter>
+      <Filter>Source\Includes\AES</Filter>
     </ClCompile>
     <ClCompile Include="..\Includes\SHA256\SHA256.cpp">
-      <Filter>Source\SHA256</Filter>
+      <Filter>Source\Includes\SHA256</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Modules\System\private\SystemModule.cpp">
+      <Filter>Source\Modules\System\private</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Modules\FileControll\private\XMLModule.cpp">
+      <Filter>Source\Modules\FileControll\private</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Modules\FileControll\private\FileModule.cpp">
+      <Filter>Source\Modules\FileControll\private</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Modules\CommandParser\private\CommandParserModule.cpp">
+      <Filter>Source\Modules\CommandParser\private</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Modules\IBaseModule.cpp">
+      <Filter>Source\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Modules\Client\private\ClientModule.cpp">
+      <Filter>Source\Modules\Client</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Source\Core\IBaseComponent.h">
-      <Filter>Source\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\FileControll\public\FileControll.h">
-      <Filter>Source\FileControll</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\FileControll\public\XMLComponent.h">
-      <Filter>Source\FileControll</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Internet\public\InternetComponent.h">
-      <Filter>Source\Internet</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Core\GarbageCollector.h">
       <Filter>Source\Core</Filter>
     </ClInclude>
-    <ClInclude Include="Source\CommandParser\public\CommandParserComponent.h">
-      <Filter>Source\CommandParser</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Core\Logger.h">
-      <Filter>Source\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Core\SystemComponent.h">
       <Filter>Source\Core</Filter>
     </ClInclude>
     <ClInclude Include="Source\pch.h">
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="..\Includes\SHA256\SHA256.h">
-      <Filter>Source\SHA256</Filter>
+      <Filter>Source\Includes\SHA256</Filter>
     </ClInclude>
     <ClInclude Include="..\Includes\AES\AES.h">
-      <Filter>Source\AES</Filter>
+      <Filter>Source\Includes\AES</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Modules\System\public\SystemModule.h">
+      <Filter>Source\Modules\System\public</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Modules\FileControll\public\FileControllModule.h">
+      <Filter>Source\Modules\FileControll\public</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Modules\FileControll\public\XMLModule.h">
+      <Filter>Source\Modules\FileControll\public</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Modules\CommandParser\public\CommandParserModule.h">
+      <Filter>Source\Modules\CommandParser\public</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Modules\IBaseModule.h">
+      <Filter>Source\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Modules\Client\public\ClientModule.h">
+      <Filter>Source\Modules\Client</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

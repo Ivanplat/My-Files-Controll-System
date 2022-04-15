@@ -1,12 +1,12 @@
 #include "pch.h"
-#include "FileControll/public/XMLComponent.h"
-#include "FileControll/public/FileControll.h"
+#include "Modules/FileControll/public/XMLModule.h"
+#include "Modules/FileControll/public/FileControllModule.h"
 #include "Core/GarbageCollector.h"
 
 
 using namespace tinyxml2;
 
-void XMLComponent::StartupModule()
+void XMLModule::StartupModule()
 {
 	GC->Log->PrintToLog("XMLComponent::StartupModule()");
 	IgnoreDocument = std::unique_ptr<XMLDocument>(new XMLDocument());
@@ -16,20 +16,20 @@ void XMLComponent::StartupModule()
 	GC->Log->PrintToLog("XMLComponent started up");
 }
 
-void XMLComponent::Update()
+void XMLModule::Update()
 {
 	GC->Log->PrintToLog("XMLComponent::Update()");
 	GC->Files->Update();
 }
 
-void XMLComponent::InitIgnoreFile()
+void XMLModule::InitIgnoreFile()
 {
 	GC->Log->PrintToLog("XMLComponent::InitIgnoreFile()");
-	auto FilePath = FileControllComponent::GetRootDirectory() + "\\FilesControll\\ignore.xml";
+	auto FilePath = FileControllModule::GetRootDirectory() + "\\FilesControll\\ignore.xml";
 
-	if (!FileControllComponent::CheckFile(FilePath))
+	if (!FileControllModule::CheckFile(FilePath))
 	{
-		FileControllComponent::CreateFile(FilePath);
+		FileControllModule::CreateFile(FilePath);
 		IgnoreDocument->LoadFile(FilePath.c_str());
 
 		XMLElement* Root = IgnoreDocument->NewElement("Ignore");
@@ -49,14 +49,14 @@ void XMLComponent::InitIgnoreFile()
 	}
 }
 
-void XMLComponent::InitCheckoutFile()
+void XMLModule::InitCheckoutFile()
 {
 	GC->Log->PrintToLog("XMLComponent::InitCheckoutFile()");
-	auto FilePath = FileControllComponent::GetRootDirectory() + "\\FilesControll\\checkout.xml";
+	auto FilePath = FileControllModule::GetRootDirectory() + "\\FilesControll\\checkout.xml";
 
-	if (!FileControllComponent::CheckFile(FilePath))
+	if (!FileControllModule::CheckFile(FilePath))
 	{
-		FileControllComponent::CreateFile(FilePath);
+		FileControllModule::CreateFile(FilePath);
 
 		XMLDocument Doc;
 		Doc.LoadFile(FilePath.c_str());
@@ -74,13 +74,13 @@ void XMLComponent::InitCheckoutFile()
 	}
 }
 
-void XMLComponent::InitStatusFile()
+void XMLModule::InitStatusFile()
 {
 	GC->Log->PrintToLog("XMLComponent::InitStatusFile()");
-	auto FilePath = FileControllComponent::GetRootDirectory() + "\\FilesControll\\status.xml";
-	if (!FileControllComponent::CheckFile(FilePath))
+	auto FilePath = FileControllModule::GetRootDirectory() + "\\FilesControll\\status.xml";
+	if (!FileControllModule::CheckFile(FilePath))
 	{
-		FileControllComponent::CreateFile(FilePath);
+		FileControllModule::CreateFile(FilePath);
 
 		XMLDocument Doc;
 		Doc.LoadFile(FilePath.c_str());
@@ -98,12 +98,12 @@ void XMLComponent::InitStatusFile()
 	}
 }
 
-void XMLComponent::AddFileToIgnore(std::filesystem::path Path, std::string Hash)
+void XMLModule::AddFileToIgnore(std::filesystem::path Path, std::string Hash)
 {
 	GC->Log->PrintToLog("XMLComponent::AddFileToIgnore()");
-	auto FilePath = FileControllComponent::GetRootDirectory() + "\\FilesControll\\ignore.xml";
+	auto FilePath = FileControllModule::GetRootDirectory() + "\\FilesControll\\ignore.xml";
 
-	if (FileControllComponent::CheckFile(FilePath))
+	if (FileControllModule::CheckFile(FilePath))
 	{
 		LoadIgnoreDocument();
 		auto Root = IgnoreDocument->FirstChildElement();
@@ -123,12 +123,12 @@ void XMLComponent::AddFileToIgnore(std::filesystem::path Path, std::string Hash)
 	}
 }
 
-void XMLComponent::AddDirectoryToIgnore(std::filesystem::path Path)
+void XMLModule::AddDirectoryToIgnore(std::filesystem::path Path)
 {
 	GC->Log->PrintToLog("XMLComponent::AddDirectoryToIgnore()");
-	auto FilePath = FileControllComponent::GetRootDirectory() + "\\FilesControll\\ignore.xml";
+	auto FilePath = FileControllModule::GetRootDirectory() + "\\FilesControll\\ignore.xml";
 
-	if (FileControllComponent::CheckFile(FilePath))
+	if (FileControllModule::CheckFile(FilePath))
 	{
 		LoadIgnoreDocument();
 		auto Root = IgnoreDocument->FirstChildElement();
@@ -148,12 +148,12 @@ void XMLComponent::AddDirectoryToIgnore(std::filesystem::path Path)
 	}
 }
 
-void XMLComponent::RemoveFileFromIgnore(std::filesystem::path Path)
+void XMLModule::RemoveFileFromIgnore(std::filesystem::path Path)
 {
 	GC->Log->PrintToLog("XMLComponent::RemoveFileFromIgnore()");
-	auto FilePath = FileControllComponent::GetRootDirectory() + "\\FilesControll\\ignore.xml";
+	auto FilePath = FileControllModule::GetRootDirectory() + "\\FilesControll\\ignore.xml";
 
-	if (FileControllComponent::CheckFile(FilePath))
+	if (FileControllModule::CheckFile(FilePath))
 	{
 		LoadIgnoreDocument();
 		auto Root = IgnoreDocument->FirstChildElement();
@@ -180,12 +180,12 @@ void XMLComponent::RemoveFileFromIgnore(std::filesystem::path Path)
 	}
 }
 
-void XMLComponent::RemoveDirectoryFromIgnore(std::filesystem::path Path)
+void XMLModule::RemoveDirectoryFromIgnore(std::filesystem::path Path)
 {
 	GC->Log->PrintToLog("XMLComponent::RemoveDirectoryFromIgnore()");
-	auto FilePath = FileControllComponent::GetRootDirectory() + "\\FilesControll\\ignore.xml";
+	auto FilePath = FileControllModule::GetRootDirectory() + "\\FilesControll\\ignore.xml";
 
-	if (FileControllComponent::CheckFile(FilePath))
+	if (FileControllModule::CheckFile(FilePath))
 	{
 		LoadIgnoreDocument();
 		auto Root = IgnoreDocument->FirstChildElement();
@@ -212,31 +212,31 @@ void XMLComponent::RemoveDirectoryFromIgnore(std::filesystem::path Path)
 	}
 }
 
-void XMLComponent::SaveIgnoreDocument()
+void XMLModule::SaveIgnoreDocument()
 {
 	GC->Log->PrintToLog("XMLComponent::SaveIgnoreDocument()");
-	auto FilePath = FileControllComponent::GetRootDirectory() + "\\FilesControll\\ignore.xml";
+	auto FilePath = FileControllModule::GetRootDirectory() + "\\FilesControll\\ignore.xml";
 	if (!IgnoreDocument->Error())
 	{
 		IgnoreDocument->SaveFile(FilePath.c_str());
 	}
 }
 
-void XMLComponent::LoadIgnoreDocument()
+void XMLModule::LoadIgnoreDocument()
 {
 	GC->Log->PrintToLog("XMLComponent::LoadIgnoreDocument()");
-	auto FilePath = FileControllComponent::GetRootDirectory() + "\\FilesControll\\ignore.xml";
+	auto FilePath = FileControllModule::GetRootDirectory() + "\\FilesControll\\ignore.xml";
 	std::cout<<IgnoreDocument->LoadFile(FilePath.c_str());
 }
 
-std::vector<std::filesystem::path> XMLComponent::GetIgnoredDirectories()
+std::vector<std::filesystem::path> XMLModule::GetIgnoredDirectories()
 {
 	GC->Log->PrintToLog("XMLComponent::GetIgnoredDirectories()");
 	std::vector<std::filesystem::path> result;
 
-	auto FilePath = FileControllComponent::GetRootDirectory() + "\\FilesControll\\ignore.xml";
+	auto FilePath = FileControllModule::GetRootDirectory() + "\\FilesControll\\ignore.xml";
 
-	if (FileControllComponent::CheckFile(FilePath))
+	if (FileControllModule::CheckFile(FilePath))
 	{
 		LoadIgnoreDocument();
 		auto Root = IgnoreDocument->FirstChildElement();
@@ -261,14 +261,14 @@ std::vector<std::filesystem::path> XMLComponent::GetIgnoredDirectories()
 	return result;
 }
 
-std::vector<std::pair<std::filesystem::path, std::string>> XMLComponent::GetIgnoredFiles()
+std::vector<std::pair<std::filesystem::path, std::string>> XMLModule::GetIgnoredFiles()
 {
 	GC->Log->PrintToLog("XMLComponent::GetIgnoredFiles()");
 	std::vector<std::pair<std::filesystem::path, std::string>> result;
 
-	auto FilePath = FileControllComponent::GetRootDirectory() + "\\FilesControll\\ignore.xml";
+	auto FilePath = FileControllModule::GetRootDirectory() + "\\FilesControll\\ignore.xml";
 
-	if (FileControllComponent::CheckFile(FilePath))
+	if (FileControllModule::CheckFile(FilePath))
 	{
 		LoadIgnoreDocument();
 		auto Root = IgnoreDocument->FirstChildElement();

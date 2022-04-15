@@ -167,12 +167,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\Includes\AES\AES.cpp" />
+    <ClCompile Include="..\Includes\SHA256\SHA256.cpp" />
     <ClCompile Include="Source\Core\GarbageCollector.cpp" />
     <ClCompile Include="Source\Core\Logger.cpp" />
     <ClCompile Include="Source\Core\main.cpp" />
     <ClCompile Include="Source\Modules\Authentication\private\AuthenticationModule.cpp" />
     <ClCompile Include="Source\Modules\FilesModule\private\FilesModule.cpp" />
     <ClCompile Include="Source\Modules\IBaseModule.cpp" />
+    <ClCompile Include="Source\Modules\ServerModule\private\ServerModule.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Includes\AES\AES.h" />
@@ -182,6 +185,7 @@
     <ClInclude Include="Source\Modules\Authentication\public\AuthenticationModule.h" />
     <ClInclude Include="Source\Modules\FilesModule\public\FilesModule.h" />
     <ClInclude Include="Source\Modules\IBaseModule.h" />
+    <ClInclude Include="Source\Modules\ServerModule\public\ServerModule.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

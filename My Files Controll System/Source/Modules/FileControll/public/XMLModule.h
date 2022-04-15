@@ -1,7 +1,7 @@
 #pragma once
 
 
-#include "Core/IBaseComponent.h"
+#include "Modules/IBaseModule.h"
 #include "tinyxml2.h"
 
 #include <memory>
@@ -9,10 +9,10 @@
 #include <map>
 
 
-class XMLComponent : public virtual IBaseComponent
+class XMLModule : public virtual IBaseModule
 {
 public:
-	explicit XMLComponent(std::string ComponentName) noexcept : Super(ComponentName) {};
+	explicit XMLModule(std::string ComponentName) noexcept : Super(ComponentName) {};
 public:
 	
 public:

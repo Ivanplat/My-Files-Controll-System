@@ -1,14 +1,14 @@
 #pragma once
 
-#include "Core/IBaseComponent.h"
+#include "Modules/IBaseModule.h"
 
 #include <filesystem>
 
 
-class InternetComponent : public virtual IBaseComponent
+class ClientModule : public virtual IBaseModule
 {
 public:
-	explicit InternetComponent(std::string ComponentName) noexcept : Super(ComponentName) {};
+	explicit ClientModule(std::string ComponentName) noexcept : Super(ComponentName) {};
 public:
 	virtual void StartupModule() override;
 	virtual void Update() override;

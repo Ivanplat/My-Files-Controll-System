@@ -1,6 +1,6 @@
 #pragma once
 
-#include "IBaseComponent.h"
+#include "Modules/IBaseModule.h"
 
 #include <chrono>
 #include <sstream>
@@ -68,10 +68,10 @@ struct FDateTime : public virtual FDate, public virtual FTime
 	}
 };
 
-class SystemComponent : public virtual IBaseComponent
+class SystemModule: public virtual IBaseModule
 {
 public:
-	explicit SystemComponent(std::string ComponentName) noexcept : Super(ComponentName) {}
+	explicit SystemModule(std::string ComponentName) noexcept : Super(ComponentName) {}
 public:
 	virtual void StartupModule() override;
 	virtual void Update() override;

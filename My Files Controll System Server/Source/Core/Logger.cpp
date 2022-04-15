@@ -8,6 +8,11 @@ Logger* Logger::Instance()
 	return &lg;
 }
 
+void Logger::PrintToConsole(std::string LogString)
+{
+	std::cout << LogString << std::endl;
+}
+
 Logger::Logger() noexcept
 {
 

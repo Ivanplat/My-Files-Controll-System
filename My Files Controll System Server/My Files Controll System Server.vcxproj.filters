@@ -28,14 +28,26 @@
     <Filter Include="Source\Modules\FilesModule\private">
       <UniqueIdentifier>{8a6c64e7-b118-43e4-9bc5-ceaf551a2b3a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\SHA256">
-      <UniqueIdentifier>{484316c0-9b37-42f0-a18e-0cc6e866e974}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source\Modules\Authentication">
       <UniqueIdentifier>{3513261c-f460-4a26-988f-300b277b2c9b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\AES">
+    <Filter Include="Source\Includes">
+      <UniqueIdentifier>{4829973e-8e32-4b6e-8877-0046b9c7e285}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Includes\SHA256">
+      <UniqueIdentifier>{484316c0-9b37-42f0-a18e-0cc6e866e974}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Includes\AES">
       <UniqueIdentifier>{26156ad2-d20a-46cd-b5ce-7d13c06497c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Modules\ServerModule">
+      <UniqueIdentifier>{1f7d748c-c968-4b5c-bd57-6c692ea87e69}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Modules\ServerModule\public">
+      <UniqueIdentifier>{433a7002-5ea3-41cd-bafd-488cc018b285}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Modules\ServerModule\private">
+      <UniqueIdentifier>{abb3adaa-352f-4e9f-a1e6-89921bc4d10b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -57,6 +69,15 @@
     <ClCompile Include="Source\Modules\Authentication\private\AuthenticationModule.cpp">
       <Filter>Source\Modules\Authentication</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Modules\ServerModule\private\ServerModule.cpp">
+      <Filter>Source\Modules\ServerModule\private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Includes\AES\AES.cpp">
+      <Filter>Source\Includes\AES</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Includes\SHA256\SHA256.cpp">
+      <Filter>Source\Includes\SHA256</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Modules\FilesModule\public\FilesModule.h">
@@ -75,10 +96,13 @@
       <Filter>Source\Modules\Authentication</Filter>
     </ClInclude>
     <ClInclude Include="..\Includes\SHA256\SHA256.h">
-      <Filter>Source\SHA256</Filter>
+      <Filter>Source\Includes\SHA256</Filter>
     </ClInclude>
     <ClInclude Include="..\Includes\AES\AES.h">
-      <Filter>Source\AES</Filter>
+      <Filter>Source\Includes\AES</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Modules\ServerModule\public\ServerModule.h">
+      <Filter>Source\Modules\ServerModule\public</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
