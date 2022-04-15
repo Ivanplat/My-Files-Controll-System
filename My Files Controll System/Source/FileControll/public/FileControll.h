@@ -1,16 +1,10 @@
 #pragma once
-
+#include "pch.h"
 #include "Core/IBaseComponent.h"
-
-#include <filesystem>
-#include <fstream>
-#include <sstream>
-#include <vector>
-#include <map>
 #include <set>
-#include <functional>
 #include <thread>
-
+#include <filesystem>
+#include <map>
 
 template<class T>
 std::set<T> operator -(std::set<T> reference, std::set<T> items_to_remove)
@@ -41,6 +35,7 @@ public:
 	static std::string GetRootDirectory();
 	static void CheckUpdates(FileControllComponent* self);
 	static void CreateFile(std::string FileName);
+	void CreateArchiveFromFile(std::filesystem::path Path);
 protected:
 	static std::set<std::map<std::filesystem::path, std::string>> Files;
 	static std::set<std::filesystem::path> Directories;

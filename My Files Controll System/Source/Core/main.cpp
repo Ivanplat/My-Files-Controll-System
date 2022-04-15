@@ -20,6 +20,8 @@ int main()
 	GC->Internet->StartupModule();
 	GC->Files->StartupModule();
 
+	GC->Files->CreateArchiveFromFile("C:\\Users\\EventGraph\\source\\repos\\My Files Controll System\\My Files Controll System\\FilesControll\\123.zip");
+
 	std::string command;
 	while (true)
 	{

@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Файлы заголовков">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Файлы ресурсов">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Source\Core">
+      <UniqueIdentifier>{703fe3c7-8954-4e29-aeb1-878499a55637}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Modules">
+      <UniqueIdentifier>{561d9359-1ea0-40ba-90af-a124e0af5650}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Modules\FilesModule">
+      <UniqueIdentifier>{022d1b4d-7519-4c99-924d-efaf16adcadf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Modules\FilesModule\public">
+      <UniqueIdentifier>{45fef64e-82a9-4ed2-9c22-a2bf750bacc3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Modules\FilesModule\private">
+      <UniqueIdentifier>{8a6c64e7-b118-43e4-9bc5-ceaf551a2b3a}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Source\Core\main.cpp">
+      <Filter>Source\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Modules\FilesModule\private\FilesModule.cpp">
+      <Filter>Source\Modules\FilesModule\private</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Modules\IBaseModule.cpp">
+      <Filter>Source\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Core\GarbageCollector.cpp">
+      <Filter>Source\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Core\Logger.cpp">
+      <Filter>Source\Core</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Source\Modules\FilesModule\public\FilesModule.h">
+      <Filter>Source\Modules\FilesModule\public</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Modules\IBaseModule.h">
+      <Filter>Source\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Core\GarbageCollector.h">
+      <Filter>Source\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Core\Logger.h">
+      <Filter>Source\Core</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

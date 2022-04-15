@@ -2,6 +2,8 @@
 #include "FileControll/public/FileControll.h"
 #include "Core/GarbageCollector.h"
 
+#include "zip.h"
+
 
 std::set<std::pair<std::filesystem::path, std::string>> FileControllComponent::IgnoredFiles = std::set<std::pair<std::filesystem::path, std::string>>();
 std::set<std::filesystem::path> FileControllComponent::IgnoredDirectories = std::set<std::filesystem::path>();
@@ -45,6 +47,25 @@ void FileControllComponent::CreateFile(std::string FileName)
 {
 	std::ofstream outfile(FileName);
 	outfile.close();
+}
+
+void FileControllComponent::CreateArchiveFromFile(std::filesystem::path Path)
+{
+	int errors;
+	auto z = zip_open(Path.string().c_str(), ZIP_CREATE, &errors);
+	auto FileName = GC->XML->GetFileNameFromPath(Path);
+
+	zip_source_t* s;
+	const char buf[] = "bufferstring";
+
+	if ((s = zip_source_buffer(z, buf, sizeof(buf), 0)) == NULL ||
+		zip_file_add(z, FileName.c_str(), s, ZIP_FL_ENC_UTF_8) < 0) {
+		zip_source_free(s);
+		printf("error adding file: %s\n", zip_strerror(z));
+	}
+	std::cout<<zip_close(z)<<std::endl;
+	std::cout << errors << std::endl;
+	
 }
 
 
