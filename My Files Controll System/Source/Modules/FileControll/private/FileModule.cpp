@@ -1,9 +1,8 @@
 #include "pch.h"
-#include "Modules/FileControll/public/FileControllModule.h"
-#include "Core/GarbageCollector.h"
 
 #include "zip.h"
 
+#include "SHA256/SHA256.h"
 
 std::set<std::pair<std::filesystem::path, std::string>> FileControllModule::IgnoredFiles = std::set<std::pair<std::filesystem::path, std::string>>();
 std::set<std::filesystem::path> FileControllModule::IgnoredDirectories = std::set<std::filesystem::path>();
@@ -27,6 +26,11 @@ const bool FileControllModule::CheckDirectory(std::filesystem::path DirectoryPat
 std::string FileControllModule::GetCurrentDirectory()
 {
 	return std::filesystem::current_path().string();
+}
+
+std::string FileControllModule::HashOfBinaryFile(std::filesystem::path Path)
+{
+	return SHA256::hashString(BinaryFileToString(Path));
 }
 
 std::filesystem::path FileControllModule::GetRootDirectory()
@@ -94,6 +98,14 @@ std::string FileControllModule::GetFileNameFromPath(std::filesystem::path Path)
 void FileControllModule::SetRootPath(std::filesystem::path NewRootPath)
 {
 	RootPath = NewRootPath;
+}
+
+std::string FileControllModule::BinaryFileToString(std::filesystem::path Path)
+{
+	std::ifstream in(Path, std::ios::binary);
+	std::string result((std::istreambuf_iterator<char>(in)),
+		std::istreambuf_iterator<char>());
+	return result;
 }
 
 

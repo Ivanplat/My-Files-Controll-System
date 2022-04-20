@@ -1,5 +1,4 @@
 #include "pch.h"
-#include "Modules/CommandParser/public/CommandParserModule.h"
 
 void CommandParserModule::StartupModule()
 {
@@ -55,7 +54,22 @@ void CommandParserModule::ParseCommand(std::string& Command)
 	switch (Type)
 	{
 	case CommandType::Error: {std::cout << "Invalit command" << std::endl; return; } break;
-	case CommandType::AddIgnoredFile: break;
+	case CommandType::AddIgnoredFile:
+	{
+		if (parsed.size() < 3)
+		{
+			std::cout << "Invalit path" << std::endl; return;
+		}
+		if (parsed.size() > 3)
+		{
+			Args = GetCommandArguments(std::set<std::string>(parsed.begin() + 3, parsed.end()));
+		}
+		auto Path = GetFileToIgnore(parsed[2]);
+		if (Path != "")
+		{
+			GC->XML->AddFileToIgnore(Path);
+		}
+	}break;
 	case CommandType::AddIgnoredDirectory: {
 		if (parsed.size() < 3)
 		{
@@ -109,7 +123,23 @@ std::filesystem::path CommandParserModule::GetDirectoryToIgnore(std::string& Com
 	std::cout << Command << std::endl;
 	Command.erase(std::remove(Command.begin(), Command.end(), '\"'));
 	Command.erase(std::remove(Command.begin(), Command.end(), '\"'));
-	if (FileControllModule::CheckDirectory(Command))
+	if (GC->Files->CheckDirectory(Command))
+	{
+		return Command;
+	}
+	else
+	{
+		std::cout << "Invalid path" << std::endl;
+		return std::filesystem::path();
+	}
+}
+
+std::filesystem::path CommandParserModule::GetFileToIgnore(std::string& Command)
+{
+	std::cout << Command << std::endl;
+	Command.erase(std::remove(Command.begin(), Command.end(), '\"'));
+	Command.erase(std::remove(Command.begin(), Command.end(), '\"'));
+	if (GC->Files->CheckFile(Command))
 	{
 		return Command;
 	}
@@ -125,7 +155,7 @@ std::filesystem::path CommandParserModule::GetInitialRepositoryPath(std::string&
 	Command.erase(std::remove(Command.begin(), Command.end(), '\"'));
 	Command.erase(std::remove(Command.begin(), Command.end(), '\"'));
 	std::cout << Command << std::endl;
-	if (FileControllModule::CheckDirectory(Command))
+	if (GC->Files->CheckDirectory(Command))
 	{
 		return Command;
 	}

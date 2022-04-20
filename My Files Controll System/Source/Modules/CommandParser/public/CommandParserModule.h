@@ -34,6 +34,7 @@ public:
 	virtual void ParseCommand(std::string& Command);
 	virtual CommandType ParseCommandType(std::string& Command);
 	virtual std::filesystem::path GetDirectoryToIgnore(std::string& Command);
+	virtual std::filesystem::path GetFileToIgnore(std::string& Command);
 	virtual std::filesystem::path GetInitialRepositoryPath(std::string& Command);
 	virtual std::string GetInitialRepositoryName(std::string& Command);
 	virtual std::set<CommandArguments> GetCommandArguments(std::set<std::string> Arguments);

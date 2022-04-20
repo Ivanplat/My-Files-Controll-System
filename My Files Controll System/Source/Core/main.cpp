@@ -1,17 +1,9 @@
 #include "pch.h"
-#include <stdarg.h>
-
-#include "Modules/IBaseModule.h"
-#include "Modules/FileControll/public/FileControllModule.h"
-#include "Modules/FileControll/public/XMLModule.h"
-#include "Modules/Client/public/ClientModule.h"
-
-#include "GarbageCollector.h"
-#include "Logger.h"
 
 #include "SHA256/SHA256.h"
 #include "AES/AES.h"
 
+#include <stdarg.h>
 #include <iostream>
 #include <random>
 
@@ -43,15 +35,19 @@ int main()
 {
 	setlocale(LC_ALL, "Russian");
 
-	GC->XML->StartupModule();
+	//GC->XML->StartupModule();
 
-	while (true)
+	GC->Client->StartupModule();
+
+	/*while (true)
 	{
 		std::cout << ">$ ";
 		std::string input;
 		std::getline(std::cin, input);
 		GC->CommandParser->ParseCommand(input);
-	}
+	}*/
+
+	//std::cout<<GC->Files->HashOfBinaryFile("E:\\Unreal Engine\\UE_4.26\\Engine\\Binaries\\Win64\\UE4Editor.exe");
 
 	return 0;
 }

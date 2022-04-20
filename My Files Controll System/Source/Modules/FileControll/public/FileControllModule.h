@@ -29,14 +29,19 @@ class FileControllModule : public virtual IBaseModule
 public:
 	explicit FileControllModule(std::string ComponentName) noexcept : Super(ComponentName) {};
 public:
-	static const bool CheckFile(std::filesystem::path FilePath);
-	static const bool CheckDirectory(std::filesystem::path  DirectoryPath);
-	static std::string GetCurrentDirectory();
-	static std::filesystem::path GetRootDirectory();
-	static void CheckUpdates(FileControllModule* self);
-	static void CreateFile(std::string FilePath);
-	void CreateArchiveFromFile(std::filesystem::path Path);
+	const bool CheckFile(std::filesystem::path FilePath);
+	const bool CheckDirectory(std::filesystem::path  DirectoryPath);
+public:
+	std::string GetCurrentDirectory();
+	std::string HashOfBinaryFile(std::filesystem::path Path);
+	std::string BinaryFileToString(std::filesystem::path Path);
 	std::string GetFileNameFromPath(std::filesystem::path Path);
+public:
+	std::filesystem::path GetRootDirectory();
+public:
+	void CheckUpdates(FileControllModule* self);
+	void CreateFile(std::string FilePath);
+	void CreateArchiveFromFile(std::filesystem::path Path);
 	void SetRootPath(std::filesystem::path NewRootPath);
 protected:
 	static std::set<std::map<std::filesystem::path, std::string>> Files;
@@ -47,11 +52,14 @@ protected:
 	static std::set<std::filesystem::path> RemovedDirectories;
 	static std::set<std::filesystem::path> ChangedDirectories;
 	static std::filesystem::path RootPath;
+protected:
 	std::thread Checker;
 private:
-	std::set<std::filesystem::path> GetAllDirectories();
-	void GetAllFiles();
 	const bool CheckEachDirectory(std::string Directory);
+private:
+	std::set<std::filesystem::path> GetAllDirectories();
+private:
+	void GetAllFiles();
 	void IsDirectoriesChanged();
 	void GetAllIgnored();
 public:

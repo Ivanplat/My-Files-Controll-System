@@ -1,8 +1,4 @@
 #include "pch.h"
-#include "Modules/FileControll/public/XMLModule.h"
-#include "Modules/FileControll/public/FileControllModule.h"
-#include "Core/GarbageCollector.h"
-
 
 using namespace tinyxml2;
 
@@ -25,12 +21,12 @@ void XMLModule::Update()
 void XMLModule::InitIgnoreFile()
 {
 	GC->Log->PrintToLog("XMLComponent::InitIgnoreFile()");
-	auto Path = FileControllModule::GetRootDirectory().string() + "\\FilesControll\\ignore.xml";
+	auto Path = GC->Files->GetRootDirectory().string() + "\\FilesControll\\ignore.xml";
 
-	if (!FileControllModule::CheckFile(Path))
+	if (!GC->Files->CheckFile(Path))
 	{
 		//LoadIgnoreDocument();
-		FileControllModule::CreateFile(Path);
+		GC->Files->CreateFile(Path);
 		IgnoreDocument->LoadFile(Path.c_str());
 
 		XMLElement* Root = IgnoreDocument->NewElement("Ignore");
@@ -40,6 +36,11 @@ void XMLModule::InitIgnoreFile()
 
 		auto DirectoriesElement = IgnoreDocument->NewElement("DIRECTORIES");
 		DirectoriesElement->SetAttribute("Count", 0);
+
+		auto DirectoryElement = IgnoreDocument->NewElement("Directory");
+		DirectoryElement->SetText((GC->Files->GetRootDirectory().string() + "\\FilesControll").c_str());
+
+		DirectoriesElement->InsertEndChild(DirectoryElement);
 
 		Root->InsertEndChild(DirectoriesElement);
 		auto FilesElement = IgnoreDocument->NewElement("FILES");
@@ -54,11 +55,11 @@ void XMLModule::InitIgnoreFile()
 void XMLModule::InitCheckoutFile()
 {
 	GC->Log->PrintToLog("XMLComponent::InitCheckoutFile()");
-	auto Path = FileControllModule::GetRootDirectory().string() + "\\FilesControll\\checkout.xml";
+	auto Path = GC->Files->GetRootDirectory().string() + "\\FilesControll\\checkout.xml";
 
-	if (!FileControllModule::CheckFile(Path))
+	if (!GC->Files->CheckFile(Path))
 	{
-		FileControllModule::CreateFile(Path);
+		GC->Files->CreateFile(Path);
 
 		XMLDocument Doc;
 		Doc.LoadFile(Path.c_str());
@@ -79,11 +80,11 @@ void XMLModule::InitCheckoutFile()
 void XMLModule::InitStatusFile(std::string RepositoryName)
 {
 	GC->Log->PrintToLog("XMLComponent::InitStatusFile()");
-	auto Path = FileControllModule::GetRootDirectory().string() + "\\FilesControll\\status.xml";
+	auto Path = GC->Files->GetRootDirectory().string() + "\\FilesControll\\status.xml";
 
-	if (!FileControllModule::CheckFile(Path))
+	if (!GC->Files->CheckFile(Path))
 	{
-		FileControllModule::CreateFile(Path);
+		GC->Files->CreateFile(Path);
 
 		XMLDocument Doc;
 		Doc.LoadFile(Path.c_str());
@@ -102,30 +103,68 @@ void XMLModule::InitStatusFile(std::string RepositoryName)
 		auto BranchesElement = Doc.NewElement("Branches");
 		BranchesElement->SetAttribute("Count", 0);
 
+		auto PublishedElement = Doc.NewElement("Published");
+		PublishedElement->SetText("");
+		PublishedElement->BoolAttribute("value", false);
+
+		auto RootDirectoryElement = Doc.NewElement("RootDirectory");
+		RootDirectoryElement->SetText(GC->Files->GetRootDirectory().string().c_str());
+
 		auto InitialBranch = Doc.NewElement("Branch");
 		InitialBranch->SetAttribute("CurrentVerison", "123");
 		InitialBranch->SetText("main");
 
 		BranchesElement->InsertEndChild(InitialBranch);
-
 		Root->InsertEndChild(InitializedElement);
 		Root->InsertEndChild(RepositoryNameElement);
+		Root->InsertEndChild(RootDirectoryElement);
+		Root->InsertEndChild(PublishedElement);
 		Root->InsertEndChild(BranchesElement);
 		Doc.SaveFile(Path.c_str());
 	}
 }
 
-void XMLModule::AddFileToIgnore(std::filesystem::path Path, std::string Hash)
+void XMLModule::InitBranchVersionInfoFile(std::string BranchName, std::string VersionString)
+{
+	GC->Log->PrintToLog("XMLComponent::InitBranchVersionInfoFile()");
+	auto FilePath = GC->Files->GetRootDirectory().string() + "\\FilesControll\\branches\\"+ BranchName +"\\"+ VersionString+"\\branch-version-info.xml";
+
+	if (!GC->Files->CheckFile(FilePath))
+	{
+		GC->Files->CreateFile(FilePath);
+
+		XMLDocument Doc;
+		Doc.LoadFile(FilePath.c_str());
+
+		XMLElement* Root = Doc.NewElement("branch-version-info");
+		Root->SetAttribute("Version", VersionString.c_str());
+		Root->SetAttribute("Current", true);
+		Doc.InsertFirstChild(Root);
+
+		auto RepositoryNameElement = Doc.NewElement("BranchName");
+		RepositoryNameElement->SetText(BranchName.c_str());
+
+		auto FilesElement = Doc.NewElement("FILES");
+		FilesElement->SetAttribute("Count", 0);
+
+		Root->InsertEndChild(RepositoryNameElement);
+		Root->InsertEndChild(FilesElement);
+		Doc.SaveFile(FilePath.c_str());
+	}
+}
+
+void XMLModule::AddFileToIgnore(std::filesystem::path Path)
 {
 	GC->Log->PrintToLog("XMLComponent::AddFileToIgnore()");
-	auto FilePath = FileControllModule::GetRootDirectory().string() + "\\FilesControll\\ignore.xml";
+	auto FilePath = GC->Files->GetRootDirectory().string() + "\\FilesControll\\ignore.xml";
 
-	if (FileControllModule::CheckFile(FilePath))
+	if (GC->Files->CheckFile(FilePath))
 	{
 		LoadIgnoreDocument();
 		auto Root = IgnoreDocument->FirstChildElement();
 		if (Root)
 		{
+			auto Hash = GC->Files->HashOfBinaryFile(Path);
 			auto FilesElement = Root->FirstChildElement("FILES");
 			auto CurrentValue = FilesElement->FindAttribute("Count")->IntValue();
 			FilesElement->SetAttribute("Count", ++CurrentValue);
@@ -143,9 +182,9 @@ void XMLModule::AddFileToIgnore(std::filesystem::path Path, std::string Hash)
 void XMLModule::AddDirectoryToIgnore(std::filesystem::path Path)
 {
 	GC->Log->PrintToLog("XMLComponent::AddDirectoryToIgnore()");
-	auto FilePath = FileControllModule::GetRootDirectory().string() + "\\FilesControll\\ignore.xml";
+	auto FilePath = GC->Files->GetRootDirectory().string() + "\\FilesControll\\ignore.xml";
 
-	if (FileControllModule::CheckFile(FilePath))
+	if (GC->Files->CheckFile(FilePath))
 	{
 		LoadIgnoreDocument();
 		auto Root = IgnoreDocument->FirstChildElement();
@@ -168,9 +207,9 @@ void XMLModule::AddDirectoryToIgnore(std::filesystem::path Path)
 void XMLModule::RemoveFileFromIgnore(std::filesystem::path Path)
 {
 	GC->Log->PrintToLog("XMLComponent::RemoveFileFromIgnore()");
-	auto FilePath = FileControllModule::GetRootDirectory().string() + "\\FilesControll\\ignore.xml";
+	auto FilePath = GC->Files->GetRootDirectory().string() + "\\FilesControll\\ignore.xml";
 
-	if (FileControllModule::CheckFile(FilePath))
+	if (GC->Files->CheckFile(FilePath))
 	{
 		LoadIgnoreDocument();
 		auto Root = IgnoreDocument->FirstChildElement();
@@ -200,9 +239,9 @@ void XMLModule::RemoveFileFromIgnore(std::filesystem::path Path)
 void XMLModule::RemoveDirectoryFromIgnore(std::filesystem::path Path)
 {
 	GC->Log->PrintToLog("XMLComponent::RemoveDirectoryFromIgnore()");
-	auto FilePath = FileControllModule::GetRootDirectory().string() + "\\FilesControll\\ignore.xml";
+	auto FilePath = GC->Files->GetRootDirectory().string() + "\\FilesControll\\ignore.xml";
 
-	if (FileControllModule::CheckFile(FilePath))
+	if (GC->Files->CheckFile(FilePath))
 	{
 		LoadIgnoreDocument();
 		auto Root = IgnoreDocument->FirstChildElement();
@@ -232,7 +271,7 @@ void XMLModule::RemoveDirectoryFromIgnore(std::filesystem::path Path)
 void XMLModule::SaveIgnoreDocument()
 {
 	GC->Log->PrintToLog("XMLComponent::SaveIgnoreDocument()");
-	auto FilePath = FileControllModule::GetRootDirectory().string() + "\\FilesControll\\ignore.xml";
+	auto FilePath = GC->Files->GetRootDirectory().string() + "\\FilesControll\\ignore.xml";
 	if (!IgnoreDocument->Error())
 	{
 		IgnoreDocument->SaveFile(FilePath.c_str());
@@ -242,17 +281,18 @@ void XMLModule::SaveIgnoreDocument()
 void XMLModule::LoadIgnoreDocument()
 {
 	GC->Log->PrintToLog("XMLComponent::LoadIgnoreDocument()");
-	auto FilePath = FileControllModule::GetRootDirectory().string() + "\\FilesControll\\ignore.xml";
+	auto FilePath = GC->Files->GetRootDirectory().string() + "\\FilesControll\\ignore.xml";
 	std::cout<<IgnoreDocument->LoadFile(FilePath.c_str());
 }
 
-void XMLModule::InitializeFiles(std::filesystem::path RepositoryPath, std::string RepositoryName)
+void XMLModule::InitializeFiles(std::filesystem::path RepositoryPath, std::string RepositoryName, std::string VersionString)
 {
 	auto FileControllPath = RepositoryPath.string() + "\\FilesControll";
 
 	InitCheckoutFile();
 	InitIgnoreFile();
 	InitStatusFile(RepositoryName);
+	InitBranchVersionInfoFile("main", VersionString);
 }
 
 std::vector<std::filesystem::path> XMLModule::GetIgnoredDirectories()
@@ -260,9 +300,9 @@ std::vector<std::filesystem::path> XMLModule::GetIgnoredDirectories()
 	GC->Log->PrintToLog("XMLComponent::GetIgnoredDirectories()");
 	std::vector<std::filesystem::path> result;
 
-	auto FilePath = FileControllModule::GetRootDirectory().string() + "\\FilesControll\\ignore.xml";
+	auto FilePath = GC->Files->GetRootDirectory().string() + "\\FilesControll\\ignore.xml";
 
-	if (FileControllModule::CheckFile(FilePath))
+	if (GC->Files->CheckFile(FilePath))
 	{
 		LoadIgnoreDocument();
 		auto Root = IgnoreDocument->FirstChildElement();
@@ -292,9 +332,9 @@ std::vector<std::pair<std::filesystem::path, std::string>> XMLModule::GetIgnored
 	GC->Log->PrintToLog("XMLComponent::GetIgnoredFiles()");
 	std::vector<std::pair<std::filesystem::path, std::string>> result;
 
-	auto FilePath = FileControllModule::GetRootDirectory().string() + "\\FilesControll\\ignore.xml";
+	auto FilePath = GC->Files->GetRootDirectory().string() + "\\FilesControll\\ignore.xml";
 
-	if (FileControllModule::CheckFile(FilePath))
+	if (GC->Files->CheckFile(FilePath))
 	{
 		LoadIgnoreDocument();
 		auto Root = IgnoreDocument->FirstChildElement();

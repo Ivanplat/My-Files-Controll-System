@@ -2,12 +2,11 @@
 #include "Modules/ServerModule/public/ServerModule.h"
 #include <fstream>
 
-#include "zip.h"
-
 #include <WS2tcpip.h>
 
 #pragma comment(lib, "ws2_32.lib")
 
+#include "zip.h"
 
 #include <functional>
 #include <list>
@@ -17,73 +16,62 @@
 #include <mutex>
 #include <shared_mutex>
 
+#include <algorithm>
+
+struct UserConnection
+{
+	unsigned long user_id;
+	std::string user_name;
+};
+
+
+void recive_file(SOCKET* sock)
+{
+    char file_size_str[16];
+    char file_name[32];
+
+    recv(*sock, file_size_str, 16, 0);
+    int file_size = atoi(file_size_str);
+    char* bytes = new char[file_size];
+
+    recv(*sock, file_name, 32, 0);
+    std::fstream file(file_name, std::ios::out | std::ios::binary);
+
+    if (file.is_open())
+    {
+        recv(*sock, bytes, file_size, 0);
+        std::cout << bytes;
+        file.write(bytes, file_size);
+        file.close();
+    }
+    delete[] bytes;
+}
+
 void ServerModule::StartupModule()
 {
-	WSADATA wsadata;
-	WORD ver = MAKEWORD(2, 2);
+    WORD vers = MAKEWORD(2, 2);
+    WSAData data;
 
-	int wsOK = WSAStartup(ver, &wsadata);
-	if (wsOK != 0)
-	{
-		GC->Log->PrintToConsole("Can not start up");
-		return;
-	}
+    WSAStartup(vers, &data);
 
-	SOCKET listening = socket(AF_INET, SOCK_STREAM, 0);
-	if (listening == INVALID_SOCKET)
-	{
-		GC->Log->PrintToConsole("Invalid socket");
-		return;
-	}
+    SOCKADDR_IN sock_info;
+    memset(&sock_info, 0, sizeof(SOCKADDR_IN));
 
-	sockaddr_in hint;
-	hint.sin_family = AF_INET;
-	hint.sin_port = htons(54000);
-	hint.sin_addr.S_un.S_addr = INADDR_ANY;
+    int addr_size = sizeof(sock_info);
+    sock_info.sin_port = htons(13);
+    sock_info.sin_family = AF_INET;
 
-	listen(listening, SOMAXCONN);
+    SOCKET sock = socket(AF_INET, SOCK_STREAM, 0);
+    bind(sock, (sockaddr*)&sock_info, sizeof(sock_info));
+    listen(sock, SOMAXCONN);
 
+    SOCKET s_connect = accept(sock, (sockaddr*)&sock_info, &addr_size);
+    if (s_connect != 0)
+    {
+        std::cout << "Connected 1!" << std::endl;
+        recive_file(&s_connect);
+    }
 
-	sockaddr_in client;
-	int client_size = sizeof(client);
-
-	SOCKET clientSocket = accept(listening, (sockaddr*)&client, &client_size);
-
-	char host[NI_MAXHOST];
-	char service[NI_MAXSERV];
-
-	if (getnameinfo((sockaddr*)&client, sizeof(client), host, NI_MAXHOST, service, NI_MAXSERV, 0) == 0)
-	{
-		std::cout << "Connected on port: " << service << std::endl;
-	}
-	else
-	{
-		inet_ntop(AF_INET, &client.sin_addr, host, NI_MAXHOST);
-		std::cout << "Connected on port: " << htons(client.sin_port) << std::endl;
-	}
-
-	char buf[4096];
-	while (true)
-	{
-		ZeroMemory(buf, 4096);
-
-		int ButesRecived = recv(clientSocket, buf, 4096, 0);
-		/*if (ButesRecived == SOCKET_ERROR)
-		{
-			GC->Log->PrintToConsole("Error in socket");
-			break;
-		}*/
-		if (ButesRecived == 0)
-		{
-			std::cout << "Client disconnected" << std::endl;
-			break;
-		}
-		send(clientSocket, buf, ButesRecived + 1, 0);
-	}
-	closesocket(clientSocket);
-	closesocket(listening);
-
-	WSACleanup();
 }
 
 void ServerModule::Update()

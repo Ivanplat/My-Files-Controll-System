@@ -77,6 +77,8 @@ public:
 	virtual void Update() override;
 public:
 	void InitNewRepository(std::filesystem::path RepositoryPath, std::string RepositoryName);
+	std::string CreateVerionHash(std::string str);
+	std::string CreateRandomString(size_t StringLengh);
 public:
 	FDateTime GetCurrentTime();
 };
