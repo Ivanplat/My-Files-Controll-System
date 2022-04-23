@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "Modules/Authentication/public/AuthenticationModule.h"
 
+#pragma comment(lib, "AES.lib")
 
 AuthenticationModule::AuthenticationModule(std::string ModuleName) noexcept : Super(ModuleName)
 {

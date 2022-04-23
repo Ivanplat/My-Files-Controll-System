@@ -18,6 +18,10 @@ void XMLModule::Update()
 	GC->Files->Update();
 }
 
+void XMLModule::ShutdownModule()
+{
+}
+
 void XMLModule::InitIgnoreFile()
 {
 	GC->Log->PrintToLog("XMLComponent::InitIgnoreFile()");
@@ -265,6 +269,69 @@ void XMLModule::RemoveDirectoryFromIgnore(std::filesystem::path Path)
 		}
 		SaveIgnoreDocument();
 		Update();
+	}
+}
+
+void XMLModule::CreateSendDataStatusFile()
+{
+	GC->Log->PrintToLog("XMLComponent::CreateSendDataStatusFile()");
+	auto Path = GC->Files->GetRootDirectory().string() + "\\FilesControll\\SendDataStatus.xml";
+
+	if (!GC->Files->CheckFile(Path))
+	{
+		GC->Files->CreateFile(Path);
+
+		XMLDocument Doc;
+		Doc.LoadFile(Path.c_str());
+
+		XMLElement* Root = Doc.NewElement("Status");
+		Root->SetAttribute("Version", "");
+		Root->SetAttribute("Platform", "");
+		Doc.InsertFirstChild(Root);
+
+		auto FilesElement = Doc.NewElement("Files");
+		auto cpy = GC->Client->FilesStack;
+		for (size_t i = 0; i < cpy.size(); i++)
+		{
+			auto FileElement = Doc.NewElement("File");
+			auto FilePath = cpy.top();
+			auto FileName = GC->Files->GetFileNameFromPath(FilePath);
+			FileElement->SetText(FileName.c_str());
+			FileElement->SetAttribute("Path", FilePath.c_str());
+			FileElement->SetAttribute("Send", false);
+			FilesElement->InsertEndChild(FileElement);
+			cpy.pop();
+		}
+		Root->InsertEndChild(FilesElement);
+
+		Doc.SaveFile(Path.c_str());
+	}
+}
+
+void XMLModule::UpdateSendDataStatusForFile(std::string FileName)
+{
+	GC->Log->PrintToLog("XMLComponent::UpdateSendDataStatusForFile()");
+	auto Path = GC->Files->GetRootDirectory().string() + "\\FilesControll\\SendDataStatus.xml";
+
+	if (GC->Files->CheckFile(Path))
+	{
+		XMLDocument Doc;
+		Doc.LoadFile(Path.c_str());
+		XMLElement* Root = Doc.FirstChildElement();
+		auto FilesElement = Root->FirstChildElement("Files");
+		auto FileElement = FilesElement->FirstChildElement("File");
+		if (FileElement)
+		{
+			while (FileElement->GetText() != FileName)
+			{
+				FileElement = FileElement->NextSiblingElement("File");
+			}
+			if (FileElement)
+			{
+				FileElement->SetAttribute("Send", true);
+			}
+		}
+		Doc.SaveFile(Path.c_str());
 	}
 }
 

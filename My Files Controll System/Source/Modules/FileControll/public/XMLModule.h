@@ -18,6 +18,7 @@ public:
 public:
 	virtual void StartupModule() override;
 	virtual void Update() override;
+	virtual void ShutdownModule() override;
 private:
 	virtual void InitIgnoreFile();
 	virtual void InitCheckoutFile();
@@ -28,6 +29,8 @@ public:
 	virtual void AddDirectoryToIgnore(std::filesystem::path Path);
 	virtual void RemoveFileFromIgnore(std::filesystem::path Path);
 	virtual void RemoveDirectoryFromIgnore(std::filesystem::path Path);
+	virtual void CreateSendDataStatusFile();
+	virtual void UpdateSendDataStatusForFile(std::string FileName);
 	void SaveIgnoreDocument();
 	void LoadIgnoreDocument();
 	void InitializeFiles(std::filesystem::path RepositoryPath, std::string RepositoryName, std::string VersionString);

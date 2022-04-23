@@ -72,12 +72,6 @@
     <ClCompile Include="Source\Modules\ServerModule\private\ServerModule.cpp">
       <Filter>Source\Modules\ServerModule\private</Filter>
     </ClCompile>
-    <ClCompile Include="..\Includes\AES\AES.cpp">
-      <Filter>Source\Includes\AES</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Includes\SHA256\SHA256.cpp">
-      <Filter>Source\Includes\SHA256</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Modules\FilesModule\public\FilesModule.h">

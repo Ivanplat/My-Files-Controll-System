@@ -5,6 +5,7 @@
 #include <thread>
 #include <filesystem>
 #include <map>
+#include <stack>
 
 template<class T>
 std::set<T> operator -(std::set<T> reference, std::set<T> items_to_remove)
@@ -43,6 +44,7 @@ public:
 	void CreateFile(std::string FilePath);
 	void CreateArchiveFromFile(std::filesystem::path Path);
 	void SetRootPath(std::filesystem::path NewRootPath);
+	void CreateFilesStack(std::vector<std::filesystem::path> Paths);
 protected:
 	static std::set<std::map<std::filesystem::path, std::string>> Files;
 	static std::set<std::filesystem::path> Directories;
@@ -65,4 +67,5 @@ private:
 public:
 	virtual void StartupModule() override;
 	virtual void Update() override;
+	virtual void ShutdownModule() override;
 };

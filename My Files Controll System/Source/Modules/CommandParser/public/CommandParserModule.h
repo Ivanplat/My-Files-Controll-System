@@ -30,6 +30,7 @@ public:
 public:
 	virtual void StartupModule() override;
 	virtual void Update() override;
+	virtual void ShutdownModule() override;
 public:
 	virtual void ParseCommand(std::string& Command);
 	virtual CommandType ParseCommandType(std::string& Command);

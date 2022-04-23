@@ -37,7 +37,7 @@ int main()
 
 	//GC->XML->StartupModule();
 
-	GC->Client->StartupModule();
+	GC->System->StartupModule();
 
 	/*while (true)
 	{
@@ -48,6 +48,16 @@ int main()
 	}*/
 
 	//std::cout<<GC->Files->HashOfBinaryFile("E:\\Unreal Engine\\UE_4.26\\Engine\\Binaries\\Win64\\UE4Editor.exe");
+	while (true)
+	{
+		std::string buf;
+		std::cin >> buf;
+		if (buf == "0")
+		{
+			GC->System->ShutdownModule();
+			break;
+		}
+	}
 
 	return 0;
 }

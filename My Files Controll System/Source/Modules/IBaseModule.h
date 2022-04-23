@@ -9,6 +9,7 @@ public:
 public:
 	std::string GetName() { return ComponentName;  };
 	virtual void StartupModule() = 0;
+	virtual void ShutdownModule() = 0;
 	virtual void Update() = 0;
 private:
 protected:

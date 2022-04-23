@@ -4,6 +4,8 @@
 
 #include "SHA256/SHA256.h"
 
+#pragma comment(lib, "SHA256.lib")
+
 std::set<std::pair<std::filesystem::path, std::string>> FileControllModule::IgnoredFiles = std::set<std::pair<std::filesystem::path, std::string>>();
 std::set<std::filesystem::path> FileControllModule::IgnoredDirectories = std::set<std::filesystem::path>();
 std::set<std::filesystem::path> FileControllModule::Directories = std::set<std::filesystem::path>();
@@ -98,6 +100,15 @@ std::string FileControllModule::GetFileNameFromPath(std::filesystem::path Path)
 void FileControllModule::SetRootPath(std::filesystem::path NewRootPath)
 {
 	RootPath = NewRootPath;
+}
+
+void FileControllModule::CreateFilesStack(std::vector<std::filesystem::path> Paths)
+{
+	for (auto i : Paths)
+	{
+		GC->Client->FilesStack.push(i.string());
+	}
+	GC->XML->CreateSendDataStatusFile();
 }
 
 std::string FileControllModule::BinaryFileToString(std::filesystem::path Path)
@@ -243,4 +254,8 @@ void FileControllModule::StartupModule()
 void FileControllModule::Update()
 {
 	GetAllIgnored();
+}
+
+void FileControllModule::ShutdownModule()
+{
 }

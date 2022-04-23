@@ -4,7 +4,7 @@
 
 #include <chrono>
 #include <sstream>
-
+#include <thread>
 
 struct FDate
 {
@@ -75,10 +75,13 @@ public:
 public:
 	virtual void StartupModule() override;
 	virtual void Update() override;
+	virtual void ShutdownModule() override;
 public:
 	void InitNewRepository(std::filesystem::path RepositoryPath, std::string RepositoryName);
 	std::string CreateVerionHash(std::string str);
 	std::string CreateRandomString(size_t StringLengh);
 public:
 	FDateTime GetCurrentTime();
+public:
+	std::map<std::string,std::thread*> Threads;
 };

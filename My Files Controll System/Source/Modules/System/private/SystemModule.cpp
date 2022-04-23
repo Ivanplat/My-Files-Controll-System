@@ -6,10 +6,28 @@
 
 void SystemModule::StartupModule()
 {
+	GC->Files->SetRootPath(std::filesystem::current_path());
+	GC->Client->StartupModule();
+	/*GC->CommandParser->StartupModule();
+	GC->XML->StartupModule();
+	GC->Files->StartupModule();*/
 }
 
 void SystemModule::Update()
 {
+}
+
+void SystemModule::ShutdownModule()
+{
+	GC->Client->ShutdownModule();
+	for (auto tr : Threads)
+	{
+		tr.second->detach();
+		if (tr.second)
+		{
+			delete tr.second;
+		}
+	}
 }
 
 void SystemModule::InitNewRepository(std::filesystem::path RepositoryPath, std::string RepositoryName)

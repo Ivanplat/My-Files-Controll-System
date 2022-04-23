@@ -8,6 +8,10 @@ void CommandParserModule::Update()
 {
 }
 
+void CommandParserModule::ShutdownModule()
+{
+}
+
 void CommandParserModule::ParseCommand(std::string& Command)
 {
 	std::string buf;

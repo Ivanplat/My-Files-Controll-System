@@ -167,8 +167,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\Includes\AES\AES.cpp" />
-    <ClCompile Include="..\Includes\SHA256\SHA256.cpp" />
     <ClCompile Include="Source\Core\GarbageCollector.cpp" />
     <ClCompile Include="Source\Core\Logger.cpp" />
     <ClCompile Include="Source\Core\main.cpp" />
