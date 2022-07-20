@@ -19,44 +19,23 @@
     <Filter Include="Source\Includes">
       <UniqueIdentifier>{d307251f-2373-44af-bbeb-c1d002375de0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Includes\SHA256">
-      <UniqueIdentifier>{143758bb-034b-495a-868d-deaf6ef6a664}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source\Includes\AES">
       <UniqueIdentifier>{fd850a6b-c00c-4bac-ac59-b7a4ab47def7}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source\Modules">
       <UniqueIdentifier>{d2d24d57-dd7c-4815-991c-c739dcf566b6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Modules\CommandParser">
-      <UniqueIdentifier>{da9df5b0-6276-46d4-bd67-31a63e4f0e3f}</UniqueIdentifier>
+    <Filter Include="Source\Includes\AES\SHA256">
+      <UniqueIdentifier>{143758bb-034b-495a-868d-deaf6ef6a664}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Modules\FileControll">
-      <UniqueIdentifier>{abe4da7d-f8bf-47ab-8a04-316cbc0a199b}</UniqueIdentifier>
+    <Filter Include="Source\Modules\XMLModule">
+      <UniqueIdentifier>{062960f1-0201-415e-898c-e1c4544a09bc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Modules\Client">
-      <UniqueIdentifier>{f3b10f11-5fc2-4fa4-b075-abba6e7d5118}</UniqueIdentifier>
+    <Filter Include="Source\Modules\SystemModule">
+      <UniqueIdentifier>{fc81618b-d3ea-4ee4-95d5-b90930731ee7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Modules\System">
-      <UniqueIdentifier>{fb6f7f53-1917-47e9-a42b-4eae63329955}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Modules\System\public">
-      <UniqueIdentifier>{8ab7880b-80d0-4209-8755-6cc19395db89}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Modules\System\private">
-      <UniqueIdentifier>{4e780f4e-89ae-4bb5-a668-71c09b85db5b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Modules\FileControll\public">
-      <UniqueIdentifier>{f934b153-3270-4fa1-a564-9f011a4f7a4c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Modules\FileControll\private">
-      <UniqueIdentifier>{bf7be132-71c9-45c0-b450-6bd172df1512}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Modules\CommandParser\public">
-      <UniqueIdentifier>{f52cd18a-d451-4d3a-bc9f-01360cee6382}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Modules\CommandParser\private">
-      <UniqueIdentifier>{deeb55ca-df35-41aa-968f-a37c596d6c6d}</UniqueIdentifier>
+    <Filter Include="Source\Modules\FilesControlModule">
+      <UniqueIdentifier>{c99c8543-9d06-4122-b9ae-7ba73cf77ea0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -72,23 +51,23 @@
     <ClCompile Include="Source\pch.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Modules\System\private\SystemModule.cpp">
-      <Filter>Source\Modules\System\private</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Modules\FileControll\private\XMLModule.cpp">
-      <Filter>Source\Modules\FileControll\private</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Modules\FileControll\private\FileModule.cpp">
-      <Filter>Source\Modules\FileControll\private</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Modules\CommandParser\private\CommandParserModule.cpp">
-      <Filter>Source\Modules\CommandParser\private</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Modules\IBaseModule.cpp">
       <Filter>Source\Modules</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Modules\Client\private\ClientModule.cpp">
-      <Filter>Source\Modules\Client</Filter>
+    <ClCompile Include="Source\Modules\XMLModule\XMLModule.cpp">
+      <Filter>Source\Modules\XMLModule</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Modules\SystemModule\SystemModule.cpp">
+      <Filter>Source\Modules\SystemModule</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Modules\CommandParserModule\CommandParserModule.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Modules\FilesControlModule\FilesControlModule.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Modules\FilesControlModule\FilesControlModule.cpp">
+      <Filter>Source\Modules\FilesControlModule</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -102,28 +81,28 @@
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="..\Includes\SHA256\SHA256.h">
-      <Filter>Source\Includes\SHA256</Filter>
+      <Filter>Source\Includes\AES\SHA256</Filter>
     </ClInclude>
     <ClInclude Include="..\Includes\AES\AES.h">
       <Filter>Source\Includes\AES</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Modules\System\public\SystemModule.h">
-      <Filter>Source\Modules\System\public</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Modules\FileControll\public\FileControllModule.h">
-      <Filter>Source\Modules\FileControll\public</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Modules\FileControll\public\XMLModule.h">
-      <Filter>Source\Modules\FileControll\public</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Modules\CommandParser\public\CommandParserModule.h">
-      <Filter>Source\Modules\CommandParser\public</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Modules\IBaseModule.h">
       <Filter>Source\Modules</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Modules\Client\public\ClientModule.h">
-      <Filter>Source\Modules\Client</Filter>
+    <ClInclude Include="Source\Modules\XMLModule\XMLModule.h">
+      <Filter>Source\Modules\XMLModule</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Modules\SystemModule\SystemModule.h">
+      <Filter>Source\Modules\SystemModule</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Modules\CommandParserModule\CommandParserModule.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Modules\FilesControlModule\FilesControlModule.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Modules\FilesControlModule\FilesControlModule.h">
+      <Filter>Source\Modules\FilesControlModule</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

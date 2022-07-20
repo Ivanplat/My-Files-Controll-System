@@ -1,9 +1,20 @@
 #pragma once
 #include <string>
+#include <vcruntime_typeinfo.h>
+#include <exception>
+
+class ModuleException : public std::exception 
+{
+public:
+	explicit ModuleException(const char* _Message) : std::exception(_Message) {}
+};
 
 class IBaseModule
 {
+protected:
+	typedef IBaseModule Super;
 public:
+	explicit IBaseModule() noexcept { ComponentName = typeid(*this).name(); }
 	explicit IBaseModule(std::string ComponentName) noexcept;
 	virtual ~IBaseModule() noexcept;
 public:
@@ -15,5 +26,3 @@ private:
 protected:
 	std::string ComponentName;
 };
-
-typedef IBaseModule Super;

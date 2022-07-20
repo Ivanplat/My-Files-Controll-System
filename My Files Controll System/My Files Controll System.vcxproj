@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -174,12 +174,11 @@
     <ClCompile Include="Source\Core\GarbageCollector.cpp" />
     <ClCompile Include="Source\Core\Logger.cpp" />
     <ClCompile Include="Source\Core\main.cpp" />
-    <ClCompile Include="Source\Modules\Client\private\ClientModule.cpp" />
-    <ClCompile Include="Source\Modules\CommandParser\private\CommandParserModule.cpp" />
-    <ClCompile Include="Source\Modules\FileControll\private\FileModule.cpp" />
-    <ClCompile Include="Source\Modules\FileControll\private\XMLModule.cpp" />
+    <ClCompile Include="Source\Modules\CommandParserModule\CommandParserModule.cpp" />
+    <ClCompile Include="Source\Modules\FilesControlModule\FilesControlModule.cpp" />
     <ClCompile Include="Source\Modules\IBaseModule.cpp" />
-    <ClCompile Include="Source\Modules\System\private\SystemModule.cpp" />
+    <ClCompile Include="Source\Modules\SystemModule\SystemModule.cpp" />
+    <ClCompile Include="Source\Modules\XMLModule\XMLModule.cpp" />
     <ClCompile Include="Source\pch.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -187,12 +186,11 @@
     <ClInclude Include="..\Includes\SHA256\SHA256.h" />
     <ClInclude Include="Source\Core\GarbageCollector.h" />
     <ClInclude Include="Source\Core\Logger.h" />
-    <ClInclude Include="Source\Modules\Client\public\ClientModule.h" />
-    <ClInclude Include="Source\Modules\CommandParser\public\CommandParserModule.h" />
-    <ClInclude Include="Source\Modules\FileControll\public\FileControllModule.h" />
-    <ClInclude Include="Source\Modules\FileControll\public\XMLModule.h" />
+    <ClInclude Include="Source\Modules\CommandParserModule\CommandParserModule.h" />
+    <ClInclude Include="Source\Modules\FilesControlModule\FilesControlModule.h" />
     <ClInclude Include="Source\Modules\IBaseModule.h" />
-    <ClInclude Include="Source\Modules\System\public\SystemModule.h" />
+    <ClInclude Include="Source\Modules\SystemModule\SystemModule.h" />
+    <ClInclude Include="Source\Modules\XMLModule\XMLModule.h" />
     <ClInclude Include="Source\pch.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
