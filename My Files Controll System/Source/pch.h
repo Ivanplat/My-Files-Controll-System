@@ -18,3 +18,22 @@
 
 
 static GarbageCollector* GC = GarbageCollector::Instance();
+
+
+enum class EProjectType
+{
+	TestProject,
+	UnrealEngine,
+	VisualStudioCPP
+};
+
+enum class EBranchStatus
+{
+	OK,
+	Commiting,
+	Pushing,
+	Pulling,
+	Merging,
+	Changing,
+	Unknown
+};

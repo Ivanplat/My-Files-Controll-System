@@ -37,6 +37,9 @@
     <Filter Include="Source\Modules\FilesControlModule">
       <UniqueIdentifier>{c99c8543-9d06-4122-b9ae-7ba73cf77ea0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\Modules\CommandParserModule">
+      <UniqueIdentifier>{e25fd985-863c-456a-9e57-b6e384bcae5b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Core\main.cpp">
@@ -60,14 +63,14 @@
     <ClCompile Include="Source\Modules\SystemModule\SystemModule.cpp">
       <Filter>Source\Modules\SystemModule</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Modules\CommandParserModule\CommandParserModule.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Modules\FilesControlModule\FilesControlModule.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="Source\Modules\FilesControlModule\FilesControlModule.cpp">
       <Filter>Source\Modules\FilesControlModule</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Modules\CommandParserModule\CommandParserModule.cpp">
+      <Filter>Source\Modules\CommandParserModule</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -95,14 +98,14 @@
     <ClInclude Include="Source\Modules\SystemModule\SystemModule.h">
       <Filter>Source\Modules\SystemModule</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Modules\CommandParserModule\CommandParserModule.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Modules\FilesControlModule\FilesControlModule.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="Source\Modules\FilesControlModule\FilesControlModule.h">
       <Filter>Source\Modules\FilesControlModule</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Modules\CommandParserModule\CommandParserModule.h">
+      <Filter>Source\Modules\CommandParserModule</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
